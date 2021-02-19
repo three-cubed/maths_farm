@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Farm 4 Mobile - Start page!</title>
+    <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
+</head>
+  
+<body id=body>
+    
+    <div class=textDiv>
+        <span style='font-size:4.6vh;font-weight:bold'>Welcome to</span>
+        <br>
+        <span style='font-size:6.6vh;font-weight:bold'>Maths Farm 4 Mobile</span>
+        <br><br>
+        Maths Farm Mobile was designed so you can play Maths Farm on a mobile phone.
+        <br>
+        Maths Farm Mobile may also be played on computers as a simplified version of Maths Farm Classic.
+        <br><br>
+        On a mobile phone, use your phone in a
+        <span style='font-style:italic'>
+            portrait
+        </span>
+        orientation. 
+        <br><br>      
+        <span style='font-weight: bold'>
+            Note that most mobile phones do not accomodate the drag-and-drop functionality offered by Maths Farm 4.
+        </span>
+        <br><br>
+    </div>
+          
+    <div id=btndiv>
+        <button type=button id=mainBtn1 onclick='startMathsFarmMobileAction()'>Start new game.</button>
+    </div>
+          
+    <div class=textDiv style='font-size:2.4vh'>
+        <br>
+        <u><b>Features of Maths Farm Mobile:</b></u>
+        <br>
+        A shorter time per play.<br>
+        Simplified user interface for reduced number of buttons & display items.<br>
+        Buttons & display items placed higher on the screen for when the keyboard is displayed on the lower part.<br>
+        <br>
+    </div>
+    
+<script>
+    
+    function startMathsFarmMobileAction(){
+        window.localStorage.clear();
+        localStorage.themestored=0;
+        window.location.href = '/MF_4_MobileAction.html'; 
+    } 
+                            
+</script>
+      
+<style>
+
+    #body{
+        background: #44AA00;
+    }
+    .textDiv{
+        font-family: sans-serif; 
+        font-size: 3vh; 
+        text-align: center;
+    }
+    #btndiv{
+        display: flex;
+        justify-content: space-around;
+    }
+    #mainBtn1{
+        height: 30vh;
+        width: 30vh;
+        border-radius: 50%;
+        outline: none;
+        font-size: 4.5vh;
+        font-family: sans-serif;
+        background: green;
+        color: goldenrod;
+    }
+        
+</style>
+      
+<<<<<<< HEAD:MF_4_Mobile1stPAge.html
+</body>
+=======
+  </body>
+>>>>>>> da3b1f6cd214298db7d983c2b6383bb8fd2c4c2d:MF_4_Mobile1stPage.html

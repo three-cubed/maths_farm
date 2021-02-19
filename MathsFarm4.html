@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Farm 4 - Start Page!</title>
+    <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMS7WJJYK0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-GMS7WJJYK0');
+    </script>
+  </head>
+<body id=body>
+    <br><br><br>
+    <div id=curvedText>
+    <span style='font-size: 3vh'>Welcome to</span>
+    <br>
+    <span style='font-size: 8vh'>Maths Farm <span style='color: #1050FF'>4</span></span>
+    <br><br>
+    <span style='font-size: 3vh'>...where arithmetic earns money...<br>and cows and pandas meet!</span>
+    <span><br><br><br><br><br></span>
+    </div>
+    <div id=btnDiv1>
+        <button type=button class=bigBtn id=outerLeftBtn onclick='goToMathsPage("/MathsFarm4_action.html", 0)'>
+            Maths Farm Classic
+        </button>
+        <button type=button class=bigBtn id=innerLeftBtn onclick='goToMathsPage("/MF_4_Mobile1stPage.html", null)'>
+            Maths Farm Mobile
+        </button>
+        <button type=button class=bigBtn id=innerRightBtn onclick='goToMathsPage("/MathsFarm4_action.html", 2)'>
+            Undersea Mathematics
+        </button>
+        <button type=button class=bigBtn id=outerRightBtn onclick='goToMathsPage("/MathsFarm4_action.html", 1)'>
+            Australian Arithmetic
+        </button>
+    </div>
+    
+    <script>
+    
+    function goToMathsPage(page, themeNum){
+      window.localStorage.clear();
+      localStorage.themeStored = themeNum;
+      window.location.href = page; 
+    }
+                            
+    </script>
+    
+    <style>
+
+    #body{background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat; height: 100vh;}
+      #curvedText{font-family: 'Lucida Handwriting', cursive; text-align: center; font-weight: bold;}
+      #btnDiv1{display: flex; justify-content: space-around;}
+        .bigBtn{height: 25vh; width: 20vw; min-width: 22vh; border-radius: 50%; outline: none; font-size: calc(1.5vw + 3vh); font-family: 'Lucida Handwriting', cursive;}
+            #outerLeftBtn{background:forestgreen; position: relative; top: -10vh; left: 6.6vh;}
+                #outerLeftBtn:active{background:darkgreen;}
+            #innerLeftBtn{background:#10521e; position: relative; top: 8.3vh;}
+                #innerLeftBtn:active{background:#082b10;}
+            #innerRightBtn{background:mediumseagreen; font-size: calc(1.6vw + 2.2vh); position: relative; top: 8.3vh;}
+                #innerRightBtn:active{background:darkgreen;}
+            #outerRightBtn{background:#83ae2a; position: relative; top: -10vh; left: -6.6vh;}
+                #outerRightBtn:active{background:green;}     
+                
+    </style>
+</body>
+</html>

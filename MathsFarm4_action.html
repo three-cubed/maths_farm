@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Farm 4 - The questions!</title>
+    <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
+  </head>
+  <body id=body>
+    <div id=topBtnContainer>
+    
+      <div id=balance_display></div>
+      
+      <div id=plusCol class=btnColumn>
+        <button type=button class='opBtn plusBtn' id='plusBtn_1' onclick='toggleBtn(plusBtn_1)'></button>
+        <button type=button class='opBtn plusBtn' id='plusBtn_2' onclick='toggleBtn(plusBtn_2)'></button>
+        <button type=button class='opBtn plusBtn' id='plusBtn_3' onclick='toggleBtn(plusBtn_3)'></button>
+        <button type=button class='opBtn plusBtn' id='plusBtn_4' onclick='toggleBtn(plusBtn_4)'></button>
+        <button type=button class='opBtn plusBtn' id='plusBtn_5' onclick='toggleBtn(plusBtn_5)'></button>
+      </div>
+      
+      <div id=minusCol class=btnColumn>
+        <button type=button class='opBtn minusBtn' id='minusBtn_1' onclick='toggleBtn(minusBtn_1)'></button>
+        <button type=button class='opBtn minusBtn' id='minusBtn_2' onclick='toggleBtn(minusBtn_2)'></button>
+        <button type=button class='opBtn minusBtn' id='minusBtn_3' onclick='toggleBtn(minusBtn_3)'></button>
+        <button type=button class='opBtn minusBtn' id='minusBtn_4' onclick='toggleBtn(minusBtn_4)'></button>
+        <button type=button class='opBtn minusBtn' id='minusBtn_5' onclick='toggleBtn(minusBtn_5)'></button>
+      </div>
+      
+      <div id=multCol class=btnColumn>
+        <button type=button class='opBtn multBtn' id='multBtn_1' onclick='toggleBtn(multBtn_1)'></button>
+        <button type=button class='opBtn multBtn' id='multBtn_2' onclick='toggleBtn(multBtn_2)'></button>
+        <button type=button class='opBtn multBtn' id='multBtn_3' onclick='toggleBtn(multBtn_3)'></button>
+        <button type=button class='opBtn multBtn' id='multBtn_4' onclick='toggleBtn(multBtn_4)'></button>
+        <button type=button class='opBtn multBtn' id='multBtn_5' onclick='toggleBtn(multBtn_5)'></button>
+      </div>
+      
+      <div id=divCol class=btnColumn>
+        <button type=button class='opBtn divBtn' id='divBtn_1' onclick='toggleBtn(divBtn_1)'></button>
+        <button type=button class='opBtn divBtn' id='divBtn_2' onclick='toggleBtn(divBtn_2)'></button>
+        <button type=button class='opBtn divBtn' id='divBtn_3' onclick='toggleBtn(divBtn_3)'></button>
+        <button type=button class='opBtn divBtn' id='divBtn_4' onclick='toggleBtn(divBtn_4)'></button>
+        <button type=button class='opBtn divBtn' id='divBtn_5' onclick='toggleBtn(divBtn_5)'></button>
+      </div>
+      
+      <div class=btnColumn>
+        <button type=button id='beginBtn' class='otherbtn' onclick='beginPlay()'>Begin play.</button>
+        <button type=button id='goToFarmBtn' class='otherbtn'>Go to the animals.</button>
+      </div>
+      
+    </div>
+    
+    <div id=qstnContainer>
+          <div class="qstnSubcontainer">
+                
+                <div id='qstnValDisplay' class='pointsDisplays'></div> 
+                <div id='timerContainer'>
+                    <div id='timer' class='notRunning'></div>
+                </div>
+          </div>
+          <div class="qstnSubcontainer">
+            <div class="title" id='question'></div>      
+            <div id='answerDiv'>
+              <input type="text"  id='userAnswer'>
+            </div>
+          </div>
+              <br><br><br>
+          <div id ='bothPointsDisplays'>         
+              <div id='pointsThisPlayDisplay' class='pointsDisplays'></div>
+              <div id='separator'></div>
+              <div id='fadingDisplay' class='pointsDisplays'></div>
+          </div>
+    </div>
+    
+    <script>
+    
+    let theme = 0;
+    // NB: JS takes null as a STRING from localStorage; also use ==. or != for localStorage.
+    if (localStorage.themeStored == 'null') localStorage.setItem('themeStored', 0); 
+    if (localStorage.themeStored != undefined) theme = parseInt(localStorage.themeStored);
+
+    const body = document.getElementById('body')
+    if (theme === 0) {body.classList.add('farmBody')}
+    if (theme === 1) {body.classList.add('aussieBody')}
+    if (theme === 2) {body.classList.add('underwaterBody')}
+
+    let currency = '£';
+    if (theme === 1) currency = 'A$';
+    const moneySuffix = '';
+
+    let points = 0;
+    const balance_display = document.getElementById('balance_display');
+
+    let earnings = 0;
+    if (localStorage.earningsStored != undefined) {
+        earnings += parseInt(localStorage.earningsStored);
+    }
+
+    balance_display.textContent = currency + earnings + moneySuffix;
+
+    let qstnVal;
+    let correctAnswer;
+    let no1;
+    let no2;
+    const question = document.getElementById('question');
+
+    let questionpicked = false;
+
+    const qstnValDisplay = document.getElementById('qstnValDisplay');
+    const pointsThisPlayDisplay = document.getElementById('pointsThisPlayDisplay');
+    const fadingDisplay = document.getElementById('fadingDisplay');
+
+    const timer = document.getElementById('timer');
+    let timerrunning = false;
+    const answerDiv = document.getElementById('answerDiv');
+    const userAnswer = document.getElementById('userAnswer');
+    answerDiv.addEventListener('keyup', check_answer);
+
+    const goToFarmBtn = document.getElementById('goToFarmBtn');
+    goToFarmBtn.addEventListener('click', goToFarm);
+
+    const opBtns = document.getElementsByClassName('opBtn');
+
+    let btnCount = -1;
+    for (let i = 0; i < opBtns.length; i++) {
+        btnCount++;
+
+        if (btnCount > 4) btnCount = 0;
+        if (btnCount === 0) opBtns[i].qstnVal = 1;
+        if (btnCount === 1) opBtns[i].qstnVal = 2;
+        if (btnCount === 2) opBtns[i].qstnVal = 4;
+        if (btnCount === 3) opBtns[i].qstnVal = 8;
+        if (btnCount === 4) opBtns[i].qstnVal = 16;
+
+        let op;
+        if (opBtns[i].classList.contains('plusBtn')) op = '+';
+        if (opBtns[i].classList.contains('minusBtn')) op = '-';
+        if (opBtns[i].classList.contains('multBtn')) op = 'x';
+        if (opBtns[i].classList.contains('divBtn')) op = '÷';
+        opBtns[i].textContent = `${op} for ` + currency + opBtns[i].qstnVal + moneySuffix;
+    }
+
+    function toggleBtn(pressedBtn) {
+        pressedBtn.classList.toggle('btnOn');
+    }
+
+    function beginPlay() {
+        questionpicked = false;
+        points = 0;
+        for (let i = 0; i < opBtns.length; i++) {
+            if (opBtns[i].classList.contains('btnOn')) {
+                questionpicked = true;
+                break;
+            }
+        }
+        if (questionpicked === false) {
+            alert('You have not picked any questions!');
+        } else if (questionpicked === true && timerrunning === false) {
+            userAnswer.focus();
+            startTimer();
+            timer.classList.remove('notRunning');
+            createNewQstn();
+            points = 15;
+            pointsThisPlayDisplay.textContent = 'This play: ' + currency + points + moneySuffix;
+            fadingDisplay.textContent = currency + points + moneySuffix;
+            showAndFade();
+        }
+    }
+
+    function createNewQstn() {
+        const btnOn = document.getElementsByClassName('btnOn');
+        const randomNum = generateNumber(0, btnOn.length - 1);
+        qstnVal = btnOn[randomNum].qstnVal;
+        qstnValDisplay.textContent = 'For ' + currency + qstnVal + moneySuffix + '!';
+        if (btnOn[randomNum].classList.contains('plusBtn') || btnOn[randomNum].classList.contains('minusBtn')) {
+            createNewQstn_plusMinus(btnOn[randomNum]);
+        }
+        if (btnOn[randomNum].classList.contains('multBtn') || btnOn[randomNum].classList.contains('divBtn')) {
+            createNewQstn_multDiv(btnOn[randomNum]);
+        }
+    }
+  
+    let small = [1, 10];
+    let midsized = [11, 99];
+    let large = [101, 999];
+    
+    function createNewQstn_plusMinus(currBtn) {
+      
+        if (currBtn.id == 'plusBtn_1') askPlus( ...small, ...small );
+        if (currBtn.id == 'plusBtn_2') askPlus( ...midsized, ...small );
+        if (currBtn.id == 'plusBtn_3') askPlus( ...midsized, ...midsized );
+        if (currBtn.id == 'plusBtn_4') askPlus( ...large, ...midsized );
+        if (currBtn.id == 'plusBtn_5') askPlus( ...large, ...large );
+        
+        if (currBtn.id == 'minusBtn_1') askMinus( ...small, ...small );
+        if (currBtn.id == 'minusBtn_2') askMinus( ...midsized, ...small );
+        if (currBtn.id == 'minusBtn_3') askMinus( ...midsized, ...midsized );
+        if (currBtn.id == 'minusBtn_4') askMinus( ...large, ...midsized );
+        if (currBtn.id == 'minusBtn_5') askMinus( ...large, ...large );
+    }
+
+    function askPlus(min_X, max_X, min_Y, max_Y) {
+        const nums = generate2numbers(min_X, max_X, min_Y, max_Y);
+        question.textContent = nums[0] + ' + ' + nums[1];
+        correctAnswer = (nums[0] + nums[1]);
+    }
+
+    function askMinus(min_X, max_X, min_Y, max_Y) {
+        const nums = generate2numbers(min_X, max_X, min_Y, max_Y);
+        no1 = Math.max(nums[0], nums[1]);
+        no2 = Math.min(nums[0], nums[1]);
+        question.textContent = no1 + ' - ' + no2;
+        correctAnswer = (no1 - no2);
+    }
+
+    function createNewQstn_multDiv(currBtn) {
+        if (currBtn.id === 'multBtn_1' || currBtn.id === 'divBtn_1') {
+            no1 = generateNumber(1, 6); if (no1 === 6) no1 = 10; no2 = generateNumber(1, 11);
+        }
+        if (currBtn.id === 'multBtn_2' || currBtn.id === 'divBtn_2') {
+            no1 = generateNumber(6, 11); if (no1 > 9) no1 += 1; no2 = generateNumber(2, 12);
+        }
+        if (currBtn.id === 'multBtn_3' || currBtn.id === 'divBtn_3') {
+            no1 = generateNumber(3, 12);
+            no2 = generateNumber(3, 12);
+            const wildCard = generateNumber(1, 4);
+            if (currBtn.id === 'multBtn_3') {
+                if (wildCard === 1) no1 *= 10;
+                if (wildCard === 2) no2 *= 10;
+                if (wildCard === 3) no2 *= 100;
+                if (wildCard === 4) {
+                    no1 *= 10;
+                    no2 *= 10;
+                }
+            }
+            if (currBtn.id === 'divBtn_3') {
+                if (wildCard <= 2) no1 *= 10;
+                if (wildCard > 2) no2 *= 10;
+            }
+        }
+        if (currBtn.id === 'multBtn_4') {
+            const wildCard = generateNumber(1, 16);
+            if (wildCard >= 5) {
+                no1 = generateNumber(13, 99); no2 = generateNumber(3, 12);
+            } else if (wildCard < 5) {
+                no1 = generateNumber(3, 12); no2 = generateNumber(3, 12);
+                if (wildCard === 1) no1 /= 10;
+                if (wildCard === 2) no2 /= 10;
+                if (wildCard === 3) no2 /= 100;
+                if (wildCard === 4) {no1 /= 10; no2 /= 10;}
+            }
+        }
+        if (currBtn.id === 'divBtn_4') {
+            no1 = generateNumber(13, 33);
+            no2 = generateNumber(3, 12);
+            if (no2 === 10) {
+                no2 = 5;
+            }
+        }
+        if (currBtn.id === 'multBtn_5') {
+            no1 = generateNumber(101, 999);
+            no2 = generateNumber(3, 9);
+        }
+        if (currBtn.id === 'divBtn_5') {
+            no1 = generateNumber(41, 149);
+            no2 = generateNumber(3, 12);
+            if (no2 === 10) {
+                no2 = 5;
+            }
+        }
+        if (currBtn.classList.contains('multBtn')) {
+            question.textContent = no1 + ' x ' + no2;
+            correctAnswer = (( (Math.round(no1 * 100)) * (Math.round(no2 * 100)) ) / 10000);
+        }
+        if (currBtn.classList.contains('divBtn')) {
+            const switchNums = generateNumber(0, 1);
+            if (switchNums === 1) {
+                const no1saved = no1;
+                no1 = no2;
+                no2 = no1saved;
+            }
+            question.textContent = (no1 * no2) + ' ÷ ' + no2;
+            correctAnswer = no1;
+        }
+    }
+
+    function generateNumber(min_inclusive, max_inclusive) {
+        return Math.floor(Math.random() * (max_inclusive - min_inclusive + 1)) + min_inclusive;
+    }
+
+    function generate2numbers(min_X, max_X, min_Y, max_Y) {
+        return [generateNumber(min_X, max_X), generateNumber(min_Y, max_Y)];
+    }
+
+    function check_answer() {
+        if (userAnswer.value == correctAnswer && timerrunning === true) { // Do not use === here, as userAnswer.value is in fact a string.
+            points = qstnVal + points;
+            fadingDisplay.textContent = '✔ ' + currency + qstnVal + moneySuffix;
+            pointsThisPlayDisplay.textContent = 'This play: ' + currency + points + moneySuffix;
+            userAnswer.value = '';
+            createNewQstn();
+            showAndFade();
+        } else if (timerrunning === false) {
+            userAnswer.value = '';
+        }
+    }
+
+    function showAndFade() {
+        fadingDisplay.animate(
+            [{opacity: '1'}, {opacity: '0'}], // Do not use a semi-colon here.
+            {duration: 1800, fill: 'forwards'}
+        );
+    }
+
+    function goToFarm() {
+        if (timer.classList.contains('notRunning')) {
+            window.location.href = '/MathsFarm4_rewards.html'; 
+        } else {
+            fadingDisplay.textContent = 'Timer running!';
+            showAndFade();
+        }
+    }
+
+    function startTimer() {
+        if (timerrunning === false) {
+            timerrunning = true;
+            timer.textContent = '80'; // desired time
+            timer.textContent = parseInt(timer.textContent) + 1; // accommodating first second
+            runTimer();
+        }
+    }
+
+    function runTimer() {
+        if (parseInt(timer.textContent) > 1) {
+            userAnswer.focus();
+            timer.textContent -= 1;
+            setTimeout('runTimer()', 1000);
+        } else {
+            stopTimer();
+        }
+    }
+
+    function stopTimer() {
+        timerrunning = false;
+        question.textContent = '';
+        qstnValDisplay.textContent = '';
+        timer.textContent = '';
+        timer.classList.add('notRunning');
+        earnings += points;
+        balance_display.textContent = currency + earnings + moneySuffix;
+        localStorage.earningsStored = earnings;
+    }
+        
+    </script>
+    
+    <style>
+      
+      .farmBody{background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat;}
+      .aussieBody{background: url(pics/eucalpytus_bckgrnd_freeuse.jpg)center/cover no-repeat;}  
+      .underwaterBody{background: url(pics/undersea+fish.jpg)center/cover no-repeat;}  
+          #topBtnContainer{display: flex; justify-content: space-around; padding-top: 2vh;}
+          #balance_display{color: gold; font-size: 4vw;}
+          .btnColumn{display: flex; flex-direction: column;}
+              .opBtn{height: 5vh; width: 14vw; border-radius: 30%; outline: none; font-size: 1.3vw;}
+                  .opBtn:active{border: solid #585858 6px;}                            
+                  .plusBtn{background: coral; ;}
+                  .minusBtn{background: papayawhip; ;}
+                  .multBtn{background:  #99FF99; ;}
+                  .divBtn{background:  #99DfFF; ;}
+          .btnOn{border:  solid 6px orangered;}
+          #goToFarmBtn{height: 8vh; width: 15vw;  border-radius: 8px; background: green; font-size: 1.45vw;} 
+              #goToFarmBtn:hover{border: solid #585858 4px;}
+          #beginBtn{height: 8vh; width: 15vw; border-radius: 8px; background: white; font-size: 1.45vw;} 
+          .otherbtn{font-family: 'Luckiest Guy', cursive; font-weight: bold;}
+          #qstnContainer{min-height: 50vh;}
+          .qstnSubcontainer{display: flex; padding: 4vh 0 0 3vw;}
+              #question{font-size: 7vh; min-height: 10vh; min-width: 20vw;}
+              #qstnValDisplay{font-size: 5vh; min-height: 10vh; color: green; background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 16vw 0vw 0vw; position: relative; top: 2.5vh;}
+              #timerContainer{background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 10vw 0vw 10vw; position: relative; top: 2.5vh;}
+                  #timer{font-size: 5vh; border: solid 2px blue; color: blue; border-radius: 40%; min-width: 5vw; text-align: center; position: fixed;}
+                  .notRunning{visibility: hidden;}
+          #answerDiv{padding: 0 0 0 3vw;}
+              #userAnswer{font-size: 10vh; width: 18vw; min-width: 25vh; background: white; opacity: 0.5; color: darkblue; position: relative; ;}
+          #bothPointsDisplays{width: 60vw; display: flex; justify-content: left; padding-left: 2vw;}
+              #pointsThisPlayDisplay{font-size: 6vh; text-align: center; min-width: 30vw; text-shadow: -2px -2px 2px black; color: darkorange; font-weight: bold;}
+              #separator{min-width: 3vw;}
+              #fadingDisplay{min-height: 38vh; min-width: 25vw; font-size: 12vh; color: red; font-weight: bold; position: relative; bottom: 22vh; right: 10vh; background: rgba(0, 0, 0, 0);}
+      
+      </style>    
+  </body>
+</html>

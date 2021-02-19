@@ -1,0 +1,547 @@
+<!-- This programme contains some apparently superfluous theme features.
+This is intended to make it easier to create functional theme features in the future, if desired,
+and can also make transfer of code from the non-mobile version of the game easier. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Farm 4 Mobile - The animals!</title>
+    <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
+</head>
+<body id=body>
+    
+    <div title = 'Your animals' id="upperScreen"> 
+        <div id=balanceDisplay></div>     
+        <button type=button class=animalBtn id=animalBtn2 onclick=obtainAnimal(2)></button>
+        <button type=button class=animalBtn id=animalBtn0 onclick=obtainAnimal(0)></button>
+        <button type=button class=animalBtn id=animalBtn1 onclick=obtainAnimal(1)></button>     
+        <button type=button class=animalBtn id=animalBtn3 onclick=obtainAnimal(3)></button>
+        <button type=button id=changePageBtn onclick=changePage()>EARN</button> 
+    </div>
+    
+    <div title = 'Your animals' id="mainScreen">
+       
+        <div id=farmRow1 class=farmRow>
+            <div id=R1C1 class=farmBox></div> 
+            <div id=R1C2 class=farmBox></div> 
+            <div id=R1C3 class=farmBox></div> 
+            <div id=R1C4 class=farmBox></div> 
+            <div id=R1C5 class=farmBox></div>
+        </div>
+       
+        <div id=farmRow2 class=farmRow>
+            <div id=R2C1 class=farmBox></div> 
+            <div id=R2C2 class=farmBox></div> 
+            <div id=R2C3 class=farmBox></div> 
+            <div id=R2C4 class=farmBox></div> 
+            <div id=R2C5 class=farmBox></div>
+        </div>
+       
+        <div id=farmRow3 class=farmRow>
+            <div id=R3C1 class=farmBox></div> 
+            <div id=R3C2 class=farmBox></div>
+            <div id=R3C3 class=farmBox></div> 
+            <div id=R3C4 class=farmBox></div> 
+            <div id=R3C5 class=farmBox></div>
+        </div>
+       
+        <div id=farmRow4 class=farmRow>
+            <div id=R4C1 class=farmBox></div> 
+            <div id=R4C2 class=farmBox></div> 
+            <div id=R4C3 class=farmBox></div> 
+            <div id=R4C4 class=farmBox></div> 
+            <div id=R4C5 class=farmBox></div>
+        </div>
+    
+      </div>
+      
+<script>
+    
+    let theme = 0; // For MFM, this is necessarily the case at the moment.
+  
+    const farmBoxes = document.getElementsByClassName('farmBox');
+    const balanceDisplay = document.getElementById('balanceDisplay');
+  
+    let earnings = 0; // by default; However...
+    if (localStorage.earningsStored !== undefined) {
+        earnings = parseInt(earnings) + parseInt(localStorage.earningsStored);
+    }
+  
+    const animalDescriptions = [
+        ['Hen & chicks', 'Pig', 'Cow', 'Panda'],
+    ];
+    const animals = [
+        ['chicken','pig','cow','panda'],
+    ];
+    const prices = [60, 120, 200, 700];
+    const currencies = ['£', 'A$', '£'];
+    const currency = currencies[theme];
+    const moneySuffix = ''; //The moneySuffix is for use with future themes. 
+    balanceDisplay.textContent = currency + earnings + moneySuffix;    
+     
+    // This loop is for loading up local storage to show where the animals are.
+    for (const farmBox of farmBoxes) {
+        const animalStored = localStorage.getItem(farmBox.id);
+        if (animalStored !== null) {
+            farmBox.classList.add('boxFilled');
+            farmBox.innerHTML = `<div class='${animalStored} animal draggable' draggable='true' data-direction-facing='-1'></div>`;
+            const mightTurn = generateNumber(1, 3);
+            if (mightTurn === 1) turnAround(farmBox.firstChild);
+        } else {
+            farmBox.classList.remove('boxFilled');
+        }
+    }
+
+    let emptyBoxes;
+    identifyEmptyBoxes();
+    formatEmptyBoxes();
+
+    function identifyEmptyBoxes() {
+        for (const farmBox of farmBoxes) {
+            if (farmBox.hasChildNodes() === true) {
+                farmBox.classList.add('boxFilled');
+            }
+            emptyBoxes = document.querySelectorAll('.farmBox:not(.boxFilled)');
+        }
+    }
+
+    function formatEmptyBoxes() {
+        for (const emptyBox of emptyBoxes) {
+            addDragEventListeners(emptyBox);
+        }
+    }
+
+    function addDragEventListeners(box) {
+        box.addEventListener('dragover', holdDrag);
+        box.addEventListener('dragenter', holdDrag);
+        box.addEventListener('dragleave', dragLeave);
+        box.addEventListener('drop', dragDrop);
+    }
+
+    function removeDragEventListeners(box) {
+        box.removeEventListener('dragover', holdDrag);
+        box.removeEventListener('dragenter', holdDrag);
+        box.removeEventListener('dragleave', dragLeave);
+        box.removeEventListener('drop', dragDrop);
+    }
+
+    const animalBtn0 = document.getElementById('animalBtn0');
+    const animalBtn1 = document.getElementById('animalBtn1');
+    const animalBtn2 = document.getElementById('animalBtn2');
+    const animalBtn3 = document.getElementById('animalBtn3');
+    const animalBtns = [animalBtn0, animalBtn1, animalBtn2, animalBtn3];
+
+    for (let i = 0; i <= 3; i++) {
+        animalBtns[i].textContent = animalDescriptions[theme][i] + ' ' + currency + prices[i] + moneySuffix;
+    }
+
+    function changePage() {
+        window.location.href = '/MF_4_MobileAction.html';
+    }
+
+    function isFarmFull() {
+        for (let i = 0; i < farmBoxes.length; i++) {
+            if (farmBoxes[i].classList.contains('boxFilled') === false) return false;
+        }
+        return true;
+    }
+
+    function countBoxesFilled() {
+        const boxesFilled = document.getElementsByClassName('boxFilled');
+        const boxesFilledArray = [...boxesFilled];
+        return boxesFilledArray.length;
+    }
+
+    runMovementTimer();
+
+    function runMovementTimer() {
+        const numberBoxesFilled = countBoxesFilled();
+        if (numberBoxesFilled > 0) {
+            let interval = Math.floor((5000 * generateNumber(1, 9)) / numberBoxesFilled); // 5,000 for gameplay gives about a move per 25 seconds per animal.
+            if (theme === 2) {interval /= 100;}
+            setTimeout(() => {
+                prepareMovement();
+                runMovementTimer();
+            }, interval);
+        } else {
+            setTimeout(() => {
+                runMovementTimer();
+            }, 6000);
+        }
+    }
+
+    function obtainAnimal(animalNum) {
+        if (earnings < prices[animalNum]) {
+            alert('You do not have enough money.');
+        } else if (isFarmFull() === true) {
+            alert('Your farm seems to be full! Good work!');
+        } else {
+            let randomBox = randomlyGenerateBoxId(3);
+            while (farmBoxes[randomBox].classList.contains('boxFilled') === true) {
+                randomBox = randomlyGenerateBoxId();
+            }
+            const animal = animals[theme][animalNum];
+            const newDiv = document.createElement('div');
+            newDiv.classList.add(animal, 'animal', 'draggable');
+            newDiv.setAttribute('draggable', 'true');
+            newDiv.setAttribute('data-direction-facing', '-1');
+            farmBoxes[randomBox].appendChild(newDiv);
+            newDiv.animate([{ opacity: '0' }, { opacity: '1' }], { duration: 4000, fill: 'forwards' });
+            localStorage.setItem(randomBox, animal);
+
+            deductMoney(prices[animalNum]);
+            formatDraggables();
+            identifyEmptyBoxes();
+            formatEmptyBoxes();
+
+            const mightTurn = generateNumber(1, 3);
+            if (mightTurn === 1) turnAround(farmBoxes[randomBox].firstChild);
+        }
+    }
+
+    let currentDraggable;
+    let currentFarmBox;
+    formatDraggables();
+    function formatDraggables() {
+        const draggables = document.querySelectorAll('.draggable');
+        draggables.forEach((draggable) => {
+            draggable.addEventListener('dragstart', () => {
+                currentDraggable = draggable;
+                currentFarmBox = draggable.parentElement.id;
+                draggable.classList.add('beingDragged');
+                draggable.style.opacity = '0.35';
+                draggable.style.filter = 'brightness(25%)';
+            });
+            draggable.addEventListener('dragend', () => {
+                draggable.style.opacity = '1';
+                draggable.style.filter = 'brightness(100%)';
+            });
+        });
+    }
+
+    function holdDrag(e) {
+        e.preventDefault(); // Necessary to allow dragDrop
+        if (!this.classList.contains('boxFilled')) {
+            this.classList.add('underDrag');
+        }
+    }
+
+    function dragLeave() {
+        this.classList.remove('underDrag');
+    }
+
+    function dragDrop() {
+        this.classList.remove('underDrag');
+        if (!this.classList.contains('boxFilled') && (earnings > 0)) {
+            this.append(currentDraggable);
+            this.classList.add('boxFilled');
+            removeDragEventListeners(this);
+            currentDraggable.classList.remove('beingDragged');
+            const animal = currentDraggable.classList.item(0);
+            farmBoxes[currentFarmBox].classList.remove('boxFilled');
+            addDragEventListeners(farmBoxes[currentFarmBox]);
+            localStorage.setItem(this.id, animal);
+            localStorage.removeItem(currentFarmBox);
+            deductMoney(1);
+        }
+    }
+
+    function randomlyGenerateBoxId(minimum = 1) {
+        const oneToFour = Math.floor(Math.random() * 4) + 1;
+        const minToFive = Math.floor(Math.random() * (6 - minimum)) + minimum;
+        return 'R' + oneToFour + 'C' + minToFive;
+    }
+
+    function deductMoney(debit) {
+        earnings -= debit;
+        localStorage.earningsStored = earnings;
+        balanceDisplay.textContent = currency + earnings + moneySuffix;
+    }
+
+    function prepareMovement() {
+        const boxesFilled = document.getElementsByClassName('boxFilled');
+        if (boxesFilled.length > 0) {
+            const provenanceId = randomlyGenerateBoxId();
+            if (!farmBoxes[provenanceId].classList.contains('boxFilled')) {
+                prepareMovement();
+            } else {
+                const movementInfo = randomlyGenerateMovementInfo(provenanceId);
+                if (movementInfo === undefined) return;
+                const destinationId = movementInfo.destination;
+                const direction = movementInfo.direction;
+                if (checkBoxAvailable(destinationId) === true) {
+                    move(farmBoxes[provenanceId].firstChild, direction, farmBoxes[provenanceId], farmBoxes[destinationId]);
+                } else {
+                    const mightTurn = generateNumber(1, 4);
+                    if (mightTurn === 1) turnAround(farmBoxes[provenanceId].firstChild);
+                }
+            }
+        }
+    }
+
+    function randomlyGenerateMovementInfo(boxId) {
+        let row = generateNumber(-1, 1);
+        if (farmBoxes[boxId].firstChild === null) return undefined;
+        let column = parseInt(farmBoxes[boxId].firstChild.dataset.directionFacing);
+        let direction = '';
+        if (row === -1) {
+            direction += 'Up';
+        } else if (row === 1) {
+            direction += 'Down';
+        }
+        if (column === -1) {
+            direction += 'Left';
+        } else if (column === 1) {
+            direction += 'Right';
+        }
+        row += parseInt(boxId[1]);
+        column += parseInt(boxId[3]);
+        const destination = 'R' + row + 'C' + column;
+        return {
+            destination: destination,
+            direction: direction,
+        };
+    }
+
+    function checkBoxAvailable(boxId) {
+        if (!farmBoxes[boxId] || farmBoxes[boxId].classList.contains('boxFilled')) {
+            return false;
+        }
+        farmBoxes[boxId].classList.add('boxFilled');
+        removeDragEventListeners(farmBoxes[boxId]);
+        farmBoxes[boxId].classList.remove('underDrag');
+        return true;
+    }
+
+    function move(mover, direction, provenance, destination) {
+        if (/animate/.test(mover.classList) === true || mover.classList.contains('beingDragged')) {
+            destination.classList.remove('boxFilled');
+            addDragEventListeners(destination);
+            return;
+        }
+        const mightTurn = generateNumber(1, 6);
+        if (mightTurn === 1) {
+            destination.classList.remove('boxFilled');
+            addDragEventListeners(destination);
+            turnAround(mover);
+            return;
+        }
+        mover.setAttribute('draggable', 'false');
+        mover.classList.remove('draggable');
+        mover.classList.add(`animate${direction}`);
+        setTimeout(() => {
+            mover.classList.remove(`animate${direction}`);
+            destination.append(mover);
+            if (provenance.hasChildNodes() === false) {
+                provenance.classList.remove('boxFilled');
+                addDragEventListeners(provenance);
+            }
+            const animal = mover.classList.item(0);
+            localStorage.setItem(destination.id, animal);
+            localStorage.removeItem(provenance.id);
+            mover.setAttribute('draggable', 'true');
+            mover.classList.add('draggable');
+        }, 6000);
+    }
+
+    function turnAround(mover) {
+        if (/animate/.test(mover.classList) === true || mover.classList.contains('beingDragged')) return;
+        let direction = 'Right';
+        if (mover.dataset.directionFacing === '1') {
+            direction = 'Left';
+        }
+        mover.classList.add(`animateTurn${direction}`);
+        mover.setAttribute('data-direction-facing', parseInt(mover.dataset.directionFacing) * -1);
+        setTimeout(() => {
+            mover.classList.remove(`animateTurn${direction}`);
+            mover.classList.toggle('flipped');
+        }, 1400);
+    }
+
+    function generateNumber(min_inclusive, max_inclusive) {
+        return Math.floor(Math.random() * (max_inclusive - min_inclusive + 1)) + min_inclusive;
+    }
+
+    upperScreen.addEventListener('dragenter', holdDragAtSellBack);
+    upperScreen.addEventListener('dragover', holdDragAtSellBack);
+    upperScreen.addEventListener('dragleave', dragLeaveSellBack);
+    upperScreen.addEventListener('drop', dragDropSellBack);
+
+    function holdDragAtSellBack(e) {
+        e.preventDefault(); // Necessary to allow dragDropSellBack
+        this.classList.add('sellBackUnderDrag');
+        balanceDisplay.style.color = 'black';
+    }
+
+    function dragLeaveSellBack() {
+        this.classList.remove('sellBackUnderDrag');
+        balanceDisplay.style.color = 'gold';
+    }
+
+    function dragDropSellBack() {
+        this.classList.remove('sellBackUnderDrag');
+        addDragEventListeners(farmBoxes[currentFarmBox]);
+        farmBoxes[currentFarmBox].classList.remove('boxFilled');
+        addDragEventListeners(farmBoxes[currentFarmBox]);
+        localStorage.removeItem(currentFarmBox);
+        let moneyBack = null;
+        while (moneyBack === null) {
+            for (const themedAnimals of animals) {
+                for (let i = 0; i < themedAnimals.length; i++) {
+                    if (themedAnimals[i] === currentDraggable.classList.item(0)) {
+                        moneyBack = Math.round(0.75 * prices[i]);
+                    }
+                }
+            }
+        }
+        deductMoney(-moneyBack);
+        balanceDisplay.style.color = 'gold';
+        currentDraggable.remove();
+    }
+    
+</script>
+
+<style>
+    
+    .animateRight{
+        animation-name: animationRight;
+        animation-duration: 6s;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.33s
+    }                   
+      
+    @keyframes animationRight {
+        10% {left: 0vw; bottom: 0vh}
+        90% {left: 19vw; bottom: 0vh}
+    }
+      
+    .animateLeft{
+        animation-name: animationLeft;
+        animation-duration: 6s;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.33s
+    }                   
+      
+    @keyframes animationLeft {
+        10% {left: 0vw; bottom: 0vh}
+        90% {left: -19vw; bottom: 0vh}
+    }
+      
+    .animateUpLeft{
+        animation-name: animationUpLeft;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.22s
+    }                   
+     
+    @keyframes animationUpLeft {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: -19.2vw; bottom: 19.7vh}
+    }
+      
+    .animateUpRight{
+        animation-name: animationUpRight;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.22s
+    }                   
+    
+    @keyframes animationUpRight {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: 19.2vw; bottom: 19.7vh}
+    }
+    
+    .animateDownLeft{
+        animation-name: animationDownLeft;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.22s
+    }                   
+    
+    @keyframes animationDownLeft {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: -19.2vw; bottom: -19.7vh}
+    }
+     
+    .animateDownRight{
+        animation-name: animationDownRight;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-delay: 0.22s
+    }                   
+     
+    @keyframes animationDownRight {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: 19.2vw; bottom: -19.7vh}
+    }
+     
+    .animateTurnLeft{
+        animation-name: animationTurnLeft;
+        animation-duration: 1.5s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.05s
+    }     
+     
+    @keyframes animationTurnLeft {
+        0% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
+        100% {-webkit-transform: scaleX(1);transform: scaleX(1)}
+    }
+      
+    .animateTurnRight{
+        animation-name: animationTurnRight;
+        animation-duration: 1.5s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.05s
+    }     
+      
+    @keyframes animationTurnRight {
+        0% {-webkit-transform: scaleX(1);transform: scaleX(1)}
+        100% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
+    }  
+      
+    .flipped {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+
+    #body{margin: 0.5vh; height: calc(99% - 9vh); width: 99%; background: url(/pics/field_of_grass_4.jpg); background-repeat: no-repeat; background-size: 175% 105%;} 
+    #upperScreen{height: 16%; width: 95vw; padding-top: 3vh; display: flex; justify-content: space-around;} 
+        .sellBackUnderDrag{background-color: orange; opacity:0.25;}    
+        .animalBtn{height: 12vh; width: 13.6vw; border-radius: 20%; background: lightblue; outline: none;}
+            .animalBtn:hover{background: blue;}  
+            .animalBtn:active{border: solid 3px black;}
+        #changePageBtn{height: 12vh; min-width: 6vh; border-radius: 25%; background: orange; outline: none;}
+            #changePageBtn:hover{background: orangered;}  
+            #changepagebtn:active{border: solid 3px black;}
+        #balanceDisplay{color: gold; font-size: calc(3.5vw + 2.2vh); font-weight: bold; text-shadow: 	-1px -1px 0 black,	1px -1px 0 black,	-1px 1px 0 black,	1px 1px 0 black; position: relative; top: 2vh}
+    #mainScreen{height: calc(80% - 3vh); width: calc(99% - 15px); padding-left: 15px; padding-top: 5vh;}
+        .farmRow{height: 19.5vh; width: calc(99% - 20px); display: flex; justify-content: space-around; margin-left: -5px}
+            .farmBox{height: 12vh; width: 12vw; font-size: 5vw; 
+                  display: flex; 
+                  justify-content: center; 
+                  align-items: center;}
+            .underDrag{background-color: #03ac13; opacity:0.25; border-radius: 50%; position: relative; bottom: 1.33vh}
+
+            .animal {position: relative; transition: all 1.5s linear; background-size: contain; background-repeat: no-repeat; cursor: not-allowed} 
+            .draggable {cursor: grab;}
+
+            .panda{z-index: 4; height: 17vh; width: 16vh; background-image: URL('https://mathematical.neocities.org/pics/panda.png');}
+            .cow{z-index: 3; height: 12vh; width: 10vh; background-image: URL('https://mathematical.neocities.org/pics/cow_free_use.png');}  
+            .pig{z-index: 2; height: 10vh; width: 7.5vh; background-image: URL('https://mathematical.neocities.org/pics/pig.png');}
+            .chicken{z-index: 1; height: 8vh; width: 9vh; background-image: URL('https://mathematical.neocities.org/pics/hen&chicks.png');}
+          
+</style>
+    
+</body>
+    
+</html>
