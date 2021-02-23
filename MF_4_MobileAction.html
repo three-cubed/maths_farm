@@ -6,28 +6,30 @@
     <title>Maths Farm 4 Mobile - The questions!</title>
     <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
 </head>
+
 <body id=body>
+
     <div id=topBtnsDiv>
     
         <div id=balanceDisplay></div>
       
-    <div class=flexiDiv>
-        <button type=button id='level_btn_easy' class='levelBtns' onclick='choose(level_btn_easy)'>Easy</button>
-    </div>
-      
-    <div class=flexiDiv>
-        <button type=button id='level_btn_medium' class='levelBtns' onclick='choose(level_btn_medium)'>Medium</button>
-    </div>
-      
-    <div class=flexiDiv>
-        <button type=button id='level_btn_hard' class='levelBtns' onclick='choose(level_btn_hard)'>Hard</button>
-    </div>
-      
-    <div class=flexiDiv>
-        <button type=button id='beginBtn' class='otherBtn' onclick='beginPlay()'>Begin play.</button>
-        <button type=button id='goToFarmBtn' class='otherBtn'>The animals</button>
-    </div>
-      
+        <div class=flexiDiv>
+            <button type=button id='level_btn_easy' class='levelBtns' onclick='choose(level_btn_easy)'>Easy</button>
+        </div>
+        
+        <div class=flexiDiv>
+            <button type=button id='level_btn_medium' class='levelBtns' onclick='choose(level_btn_medium)'>Medium</button>
+        </div>
+        
+        <div class=flexiDiv>
+            <button type=button id='level_btn_hard' class='levelBtns' onclick='choose(level_btn_hard)'>Hard</button>
+        </div>
+        
+        <div class=flexiDiv>
+            <button type=button id='beginBtn' class='otherBtn' onclick='beginPlay()'>Begin play.</button>
+            <button type=button id='goToFarmBtn' class='otherBtn'>The animals</button>
+        </div>
+        
     </div>
     
     <div id=mathsquestions>       
@@ -336,37 +338,161 @@
     
 <style>
 
-    .farmBody{width: 99%; background: url(/pics/field_sky_fruse.jpg); background-size: 100% 125%;} 
-        #topBtnsDiv{display: flex; justify-content: space-around; padding-top: 2vh;}
-        #balanceDisplay{color: gold; font-size: calc(3.5vw + 2.2vh); text-shadow: 	-1px -1px 0 #000,	1px -1px 0 #000,	-1px 1px 0 #000,	1px 1px 0 #000; position: relative; top: 1.6vh}
-        .flexiDiv{display: flex; flex-direction: column;}
-            .levelBtns{height: 10vh; width:  14vw; border-radius: 30%; outline: none; font-size: 2.5vw; font-weight: bold;}
-            .levelBtns:active{border: solid #585858 6px;}                            
-                #level_btn_hard{background: #ff6f50;}
-                #level_btn_medium{background: #ffa943;}
-                #level_btn_easy{background:  #99FF99;}
-                .divbtn{background:  #99DfFF;}
-        .btnOn{border: solid 3px orangered;}
-        #goToFarmBtn{height: 7vh; width: 15vw;  border-radius: 8px; background: #009933; font-size: 2vw;} 
-            #goToFarmBtn:hover{border: solid #585858 2px;}
-        #beginBtn{height: 7vh; width: 15vw;  border-radius: 8px; background: white; font-size: 2vw;} 
-            #beginBtn:hover{border: solid #585858 2px;}
-        .otherBtn{font-weight: bold;}
-        #mathsquestions{min-height: 50vh;}
-        .qstnSubcontainer{display: flex; padding: 4vh 0 0 3vw;}
-            #question{font-size: 7.5vh; min-height: 10vh; min-width: 28vw;}
-            #pointstowin{font-size: 5vh; min-height: 10vh; color: green; background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 16vw 0vw 0vw; position: relative; top: 2.5vh;}
-            #timerContainer{background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 10vw 0vw 10vw; position: relative; top: 2.5vh;}
-                #timer{font-size: 5vh; border: solid 2px blue; color: blue; border-radius: 40%; min-width: 5vw; text-align: center; position: fixed;}
-                .notRunning{visibility: hidden;} 
-        #answer_div{padding: 0 0 0 3vw; position: relative; left: 2vh}
-            #userAnswer{font-size: 12.5vh; width: 18vw; min-width: 36vw; background: white; opacity: 0.5; color: darkblue; position: relative;}
-        #bothPointsDisplays{width: 60vw; display: flex; justify-content: left; padding-left: 2vw;}
-            #pointsThisPlayDisplay{font-size: 4vh; text-align: center; min-width: 30vw; text-shadow: 	-1px -1px 0 black,	1px -1px 0 black,	-1px 1px 0 black,	1px 1px 0 black; color: darkorange; font-weight: bold; position: relative; bottom: 8vh;}
-            #separator{min-width: 3vw;}
-            #fadingDisplay{min-height: 38vh; min-width: 25vw; font-size: 10vh; color: red; font-weight: bold; position: relative; bottom: 22vh; left: 10vw; background: rgba(0, 0, 0, 0);}
-                              
+    .farmBody {width: 99%; background: url(/pics/field_sky_fruse.jpg); background-size: 100% 125%;} 
+        
+    /* Upper screen */
+
+    #balanceDisplay {
+        color: gold; 
+        font-size: calc(3.5vw + 2.2vh); 
+        text-shadow: 	-1px -1px 0 #000,	1px -1px 0 #000,	-1px 1px 0 #000,	1px 1px 0 #000; 
+        position: relative; 
+        top: 1.6vh
+    }
+    #beginBtn {
+        height: 7vh; 
+        width: 15vw;  
+        border-radius: 8px; 
+        background: white; 
+        font-size: 2vw;
+    } 
+    #beginBtn:hover {
+        border: solid #585858 2px;
+    }
+    .btnOn {
+        border: solid 3px orangered;
+    }
+    .flexiDiv {
+        display: flex; 
+        flex-direction: column;
+    }
+    #goToFarmBtn {
+        height: 7vh; 
+        width: 15vw;  
+        border-radius: 8px; 
+        background: #009933; 
+        font-size: 2vw;
+    } 
+    #goToFarmBtn:hover {
+        border: solid #585858 2px;
+    }
+    .levelBtns {
+        height: 10vh; 
+        width:  14vw; 
+        border-radius: 30%; 
+        outline: none; 
+        font-size: 2.5vw; 
+        font-weight: bold;
+    }
+    .levelBtns:active {
+        border: solid #585858 6px;
+    }                            
+    #level_btn_easy {
+        background:  #99FF99;
+    }
+    #level_btn_medium {
+        background: #ffa943;
+    }
+    #level_btn_hard {
+        background: #ff6f50;
+    }
+    .otherBtn {
+        font-weight: bold;
+    }           
+    #topBtnsDiv {
+        display: flex; 
+        justify-content: space-around; 
+        padding-top: 2vh;
+    }
+
+    /* Rest of screen */
+   
+    #answer_div {
+        padding: 0 0 0 3vw; 
+        position: relative; left: 2vh;
+    }
+    #bothPointsDisplays {width: 60vw; 
+        display: flex; 
+        justify-content: left; 
+        padding-left: 2vw;
+    }
+    #fadingDisplay {
+        min-height: 38vh; 
+        min-width: 25vw; 
+        font-size: 10vh; 
+        color: red; 
+        font-weight: bold; 
+        position: relative; 
+        bottom: 22vh; 
+        left: 10vw; 
+        background: rgba(0, 0, 0, 0);
+    }
+    #mathsquestions {
+        min-height: 50vh;
+    }
+    #pointsThisPlayDisplay {
+        font-size: 4vh; 
+        text-align: center; 
+        min-width: 30vw; 
+        text-shadow: 	-1px -1px 0 black,	1px -1px 0 black,	-1px 1px 0 black,	1px 1px 0 black; 
+        color: darkorange; 
+        font-weight: bold; 
+        position: relative; 
+        bottom: 8vh;
+    }
+    #pointstowin {
+        font-size: 5vh; 
+        min-height: 10vh; 
+        color: green; 
+        background: rgba(0, 0, 0, 0); 
+        font-weight: bold; 
+        padding: 0vw 16vw 0vw 0vw; 
+        position: relative; 
+        top: 2.5vh;
+    }
+    #question {
+        font-size: 7.5vh; 
+        min-height: 10vh; 
+        min-width: 28vw;
+    }
+    .qstnSubcontainer {
+        display: flex; 
+        padding: 4vh 0 0 3vw;
+    }
+    #separator {
+        min-width: 3vw;
+    }
+    #timerContainer {
+        background: rgba(0, 0, 0, 0); 
+        font-weight: bold; 
+        padding: 0vw 10vw 0vw 10vw; 
+        position: relative; 
+        top: 2.5vh;
+    }
+    #timer {
+        font-size: 5vh; 
+        border: solid 2px blue; 
+        color: blue; 
+        border-radius: 40%; 
+        min-width: 5vw; 
+        text-align: center; 
+        position: fixed;
+    }
+    .notRunning {
+        visibility: hidden;
+    } 
+    #userAnswer {
+        font-size: 12.5vh; 
+        width: 18vw; 
+        min-width: 36vw; 
+        background: white; 
+        opacity: 0.5; 
+        color: darkblue; 
+        position: relative;
+    }
+                
 </style>
     
 </body>
+
 </html>

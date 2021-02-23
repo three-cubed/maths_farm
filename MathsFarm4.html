@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Farm 4 - Start Page!</title>
@@ -14,7 +15,8 @@
     
       gtag('config', 'G-GMS7WJJYK0');
     </script>
-  </head>
+</head>
+
 <body id=body>
     <br><br><br>
     <div id=curvedText>
@@ -40,31 +42,78 @@
         </button>
     </div>
     
-    <script>
+<script>
     
     function goToMathsPage(page, themeNum){
-      window.localStorage.clear();
-      localStorage.themeStored = themeNum;
-      window.location.href = page; 
+        window.localStorage.clear();
+        localStorage.themeStored = themeNum;
+        window.location.href = page; 
     }
                             
-    </script>
+</script>
     
-    <style>
+<style>
 
-    #body{background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat; height: 100vh;}
-      #curvedText{font-family: 'Lucida Handwriting', cursive; text-align: center; font-weight: bold;}
-      #btnDiv1{display: flex; justify-content: space-around;}
-        .bigBtn{height: 25vh; width: 20vw; min-width: 22vh; border-radius: 50%; outline: none; font-size: calc(1.5vw + 3vh); font-family: 'Lucida Handwriting', cursive;}
-            #outerLeftBtn{background:forestgreen; position: relative; top: -10vh; left: 6.6vh;}
-                #outerLeftBtn:active{background:darkgreen;}
-            #innerLeftBtn{background:#10521e; position: relative; top: 8.3vh;}
-                #innerLeftBtn:active{background:#082b10;}
-            #innerRightBtn{background:mediumseagreen; font-size: calc(1.6vw + 2.2vh); position: relative; top: 8.3vh;}
-                #innerRightBtn:active{background:darkgreen;}
-            #outerRightBtn{background:#83ae2a; position: relative; top: -10vh; left: -6.6vh;}
-                #outerRightBtn:active{background:green;}     
+    #body{
+        background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat; 
+        height: 100vh;
+    }    
+    #curvedText{
+        font-family: 'Lucida Handwriting', cursive; 
+        text-align: center; 
+        font-weight: bold;
+    }
+    #btnDiv1{
+        display: flex; 
+        justify-content: space-around;
+    }
+    .bigBtn{
+        height: 25vh;  
+        width: 20vw; 
+        min-width: 22vh; 
+        border-radius: 50%; 
+        outline: none; 
+        font-size: calc(1.5vw + 3vh); 
+        font-family: 'Lucida Handwriting', cursive;
+    }
+    #outerLeftBtn{
+        background:forestgreen; 
+        position: relative; 
+        top: -10vh; 
+        left: 6.6vh;
+    }
+        #outerLeftBtn:active{
+            background:darkgreen;
+        }
+    #innerLeftBtn{
+        background:#10521e; 
+        position: relative; 
+        top: 8.3vh;
+    }
+        #innerLeftBtn:active{
+            background:#082b10;
+        }
+    #innerRightBtn{
+        background:mediumseagreen; 
+        font-size: calc(1.6vw + 2.2vh); 
+        position: relative; 
+        top: 8.3vh;
+    }
+        #innerRightBtn:active{
+            background:darkgreen;
+        }
+    #outerRightBtn{
+        background:#83ae2a; 
+        position: relative; 
+        top: -10vh; 
+        left: -6.6vh;
+    }
+        #outerRightBtn:active{
+            background:green;
+        }     
                 
-    </style>
+</style>
+
 </body>
+
 </html>

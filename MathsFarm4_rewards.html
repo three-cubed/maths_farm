@@ -414,195 +414,292 @@
 </script>
     
 <style>
-      .animateRight {
-    animation-name: animationRight;
-    animation-duration: 6s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.33s
-}                   
 
-@keyframes animationRight {
-    10% {left: 0vw; bottom: 0vh}
-    90% {left: 19vw; bottom: 0vh}
-}
+    /* 
+    Contents of style section:
+        Animation classes and animations are shown first.
+        Other elements and classes, except specific animals and .animal, are shown next, alphabeticallly.
+        Specific animals are shown last, grouped by theme, as well as .animal.
+    */
 
-.animateLeft {
-    animation-name: animationLeft;
-    animation-duration: 6s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.33s
-}                   
+    /* Animation classes and animations */
 
-@keyframes animationLeft {
-    10% {left: 0vw; bottom: 0vh}
-    90% {left: -19vw; bottom: 0vh}
-}
+    .animateLeft {
+        animation-name: animationLeft;
+        animation-duration: 6s;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.33s
+    }                   
 
-.animateUpLeft {
-    animation-name: animationUpLeft;
-    animation-duration: 6s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.22s
-}                   
+    @keyframes animationLeft {
+        10% {left: 0vw; bottom: 0vh}
+        90% {left: -19vw; bottom: 0vh}
+    }
 
-@keyframes animationUpLeft {
-    0% {left: 0vw; bottom: 0vh}
-    100% {left: -19vw; bottom: 19.7vh}
-}
+    .animateRight {
+        animation-name: animationRight;
+        animation-duration: 6s;
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.33s
+    }                   
 
-.animateUpRight {
-    animation-name: animationUpRight;
-    animation-duration: 6s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.22s
-}                   
+    @keyframes animationRight {
+        10% {left: 0vw; bottom: 0vh}
+        90% {left: 19vw; bottom: 0vh}
+    }
 
-@keyframes animationUpRight {
-    0% {left: 0vw; bottom: 0vh}
-    100% {left: 19vw; bottom: 19.7vh}
-}
+    .animateUpLeft {
+        animation-name: animationUpLeft;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-delay: 0.22s
+    }                   
 
-.animateDownLeft {
-    animation-name: animationDownLeft;
-    animation-duration: 6s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.22s
-}                   
+    @keyframes animationUpLeft {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: -19.2vw; bottom: 21.5vh}
+    }
 
-@keyframes animationDownLeft {
-    0% {left: 0vw; bottom: 0vh}
-    100% {left: -19vw; bottom: -19.7vh}
-}
+    .animateUpRight {
+        animation-name: animationUpRight;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-delay: 0.22s
+    }                   
 
-.animateDownRight {
-    animation-name: animationDownRight;
-    animation-duration: 6s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.22s
-}                   
+    @keyframes animationUpRight {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: 19.2vw; bottom: 21.5vh}
+    }
 
-@keyframes animationDownRight {
-    0% {left: 0vw; bottom: 0vh}
-    100% {left: 19vw; bottom: -19.7vh}
-}
+    .animateDownLeft {
+        animation-name: animationDownLeft;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.22s
+    }                   
 
-.animateTurnLeft {
-    animation-name: animationTurnLeft;
-    animation-duration: 1.5s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.05s
-}     
+    @keyframes animationDownLeft {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: -19.2vw; bottom: -21.5vh}
+    }
 
-@keyframes animationTurnLeft {
-    0% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
-    100% {-webkit-transform: scaleX(1);transform: scaleX(1)}
-}
+    .animateDownRight {
+        animation-name: animationDownRight;
+        animation-duration: 6s;      
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-delay: 0.22s
+    }                   
 
-.animateTurnRight {
-    animation-name: animationTurnRight;
-    animation-duration: 1.5s;      
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 0.05s
-}     
+    @keyframes animationDownRight {
+        0% {left: 0vw; bottom: 0vh}
+        100% {left: 19.2vw; bottom: -21.5vh}
+    }
 
-@keyframes animationTurnRight {
-    0% {-webkit-transform: scaleX(1);transform: scaleX(1)}
-    100% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
-}  
+    .animateTurnLeft {
+        animation-name: animationTurnLeft;
+        animation-duration: 1.5s;      
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-delay: 0.05s
+    }     
 
-.flipped {
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-}
+    @keyframes animationTurnLeft {
+        0% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
+        100% {-webkit-transform: scaleX(1);transform: scaleX(1)}
+    }
 
-.fieldBody {
-    margin: 4px; 
-    height: 100vh; 
-    background: url(/pics/field_of_grass_4.jpg)center/cover no-repeat;
-} 
-.underwaterBody {
-    margin: 4px; 
-    height: 100vh; 
-    background: url(pics/undersea.jpg)center/cover no-repeat;
-}
-#upperScreen {
-    height: 10vh; 
-    padding-top: 3vh; 
-    display: flex; 
-    justify-content: 
-    space-around;
-} 
-.sellBackUnderDrag {
-    background-color: orange; opacity:0.25;
-}
-#balance_display {
-    color: gold; font-size: 4vw;
-}
-.animalBtn {
-    height: 5vh; 
-    width: 15vw; 
-    border-radius: 20%;
-    background: lightblue; 
-    outline: none;
-}
-.animalBtn:hover {
-    background: blue;
-}  
-.animalBtn:active {
-    border: solid 3px black;
-}
-#changePageBtn {
-    height: 5vh; 
-    min-width: 15vh; 
-    border-radius: 20%; 
-    background: orange; 
-    outline: none;
-}
-#changePageBtn:hover {
-    background: orangered;
-}  
-#changePageBtn:active {
-    border: solid 3px black
-    ;}
-#mainScreen {
-    height: 86vh; 
-}
-  .farmRow{height: 19.5vh; width: 95vw; display: flex; justify-content: space-around;}
-  .farmBox{height: 18vh; width: 18vw; 
-  font-size: 5vw; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center;}
-  .underDrag{background-color: #03ac13; opacity:0.25; border-radius: 50%}
-  
-  .animal {position: relative; transition: all 1s ease-out; background-size: contain; background-repeat: no-repeat; cursor: not-allowed} 
-  .draggable {cursor: grab;}
-  
-  .panda {z-index: 4; height: 17vh; width: 16vh; background-image: URL('https://mathematical.neocities.org/pics/panda.png');}
-  .cow {z-index: 3; height: 13vh; width: 10vh; background-image: URL('https://mathematical.neocities.org/pics/cow_free_use.png')}  
-  .pig {z-index: 2; height: 10vh; width: 8vh; background-image: URL('https://mathematical.neocities.org/pics/pig.png')} 
-  .chicken {z-index: 1; height: 8vh; width: 9vh; background-image: URL('https://mathematical.neocities.org/pics/hen&chicks.png');}
-     
-  .kang{height: 21vh; width: 18vh; background-image: URL('https://mathematical.neocities.org/pics/kangaroo_big.png');}   
-  .emu{height: 17vh; width: 11vh; background-image: URL('https://mathematical.neocities.org/pics/emu_invis_bckgrd.png');}
-  .sheep{height: 14vh; width: 15.5vh; background-image: URL('https://mathematical.neocities.org/pics/sheep_merino_flipped.jpg');}
-  .koala{height: 8.6vh; width: 6vh; background-image: URL('https://mathematical.neocities.org/pics/koala_fruse.png');}
-  
-  .turtle{transition: all 0.1s linear; height: 12vh; width: 18.5vh; background-image: URL('https://mathematical.neocities.org/pics/sea_turtle_creativecommons_transback_2.png');}
-  .tuna{transition: all 0.1s linear; height: 7vh; width: 16vh; background-image: URL('https://mathematical.neocities.org/pics/tunafish.png');}  
-  .jellyfish{transition: all 0.1s linear; height: 10vh; width: 7vh; background-image: URL('https://mathematical.neocities.org/pics/jellyfishpurple.png');}
-  .narwhal{transition: all 0.1s linear; height: 13vh; width: 36vh; background-image: URL('https://mathematical.neocities.org/pics/narwhal.png'); right: 4vh;}
-  
+    .animateTurnRight {
+        animation-name: animationTurnRight;
+        animation-duration: 1.5s;      
+        animation-iteration-count: 1;
+        animation-timing-function: linear;
+        animation-delay: 0.05s
+    }     
+
+    @keyframes animationTurnRight {
+        0% {-webkit-transform: scaleX(1);transform: scaleX(1)}
+        100% {-webkit-transform: scaleX(-1);transform: scaleX(-1)}
+    }  
+
+    .flipped {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+    }
+
+    /* Other elements and classes, except specific animals and .animal, listed alphabeticallly */
+
+    .animalBtn {
+        height: 5vh; 
+        width: 15vw; 
+        border-radius: 20%;
+        background: lightblue; 
+        outline: none;
+    }
+    .animalBtn:active {
+        border: solid 3px black;
+    }
+    .animalBtn:hover {
+        background: blue;
+    }  
+    #balance_display {
+        color: gold; font-size: 4vw;
+    }
+    #changePageBtn {
+        height: 5vh; 
+        min-width: 15vh; 
+        border-radius: 20%; 
+        background: orange; 
+        outline: none;
+    }
+    #changePageBtn:active {
+        border: solid 3px black;
+    }
+    #changePageBtn:hover {
+        background: orangered;
+    }  
+    .draggable {
+        cursor: grab;
+    }
+    .farmBox{
+        height: 18vh; 
+        width: 18vw; 
+        font-size: 5vw; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    }
+    .farmRow{
+        height: 21vh; 
+        width: 95vw; 
+        display: flex; 
+        justify-content: space-around;
+    }
+    .fieldBody {
+        margin: 4px; 
+        height: 100vh; 
+        background: url(/pics/field_of_grass_4.jpg)center/cover no-repeat;
+    } 
+    .underDrag{
+        background-color: #03ac13; 
+        opacity:0.25; 
+        border-radius: 50%
+    } 
+    .underwaterBody {
+        margin: 4px; 
+        height: 100vh; 
+        background: url(pics/undersea.jpg)center/cover no-repeat;
+    }
+    #upperScreen {
+        height: 10vh; 
+        width: 100vw;
+        padding-top: 3vh; 
+        display: flex; 
+        justify-content: 
+        space-around;
+    } 
+    #mainScreen {
+        height: 88vh; 
+        width: 100vw;
+    }
+    .sellBackUnderDrag {
+        background-color: orange; opacity:0.25;
+    }
+
+    /* Specific animals, grouped by theme and by index number within the theme, and also the .animal class. */
+
+        /* .animal */
+
+        .animal {position: relative; transition: all 1s ease-out; background-size: contain; background-repeat: no-repeat; cursor: not-allowed} 
+
+        /* Animals for theme 0 (classic) */
         
+        .panda {
+            z-index: 4; 
+            height: 17vh; 
+            width: 16vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/panda.png');
+        }
+        .cow {
+            z-index: 3; 
+            height: 13vh; 
+            width: 10vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/cow_free_use.png');
+        }  
+        .pig {
+            z-index: 2; 
+            height: 10vh; 
+            width: 8vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/pig.png');
+        } 
+        .chicken {
+            z-index: 1; 
+            height: 8vh; 
+            width: 9vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/hen&chicks.png');
+        }
+            
+        /* Animals for theme 1 (Australian) */
+
+        .kang {
+            z-index: 4; 
+            height: 21vh; 
+            width: 18vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/kangaroo_big.png');
+        }   
+        .emu {
+            z-index: 3; 
+            height: 17vh; 
+            width: 11vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/emu_invis_bckgrd.png');
+        }
+        .sheep {
+            z-index: 2; 
+            height: 14vh; 
+            width: 15.5vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/sheep_merino_flipped.jpg');
+        }
+        .koala {
+            z-index: 1; 
+            height: 8.6vh; 
+            width: 6vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/koala_fruse.png');
+        }
+        
+        /* Animals for theme 2 (underwater) */
+
+        .turtle {
+            transition: all 0.1s linear; 
+            height: 12vh; width: 18.5vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/sea_turtle_creativecommons_transback_2.png');
+        }
+        .tuna {
+            transition: all 0.1s linear; 
+            height: 7vh; 
+            width: 16vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/tunafish.png');
+        }  
+        .jellyfish {
+            transition: all 0.1s linear; 
+            height: 10vh; 
+            width: 7vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/jellyfishpurple.png');
+        }
+        .narwhal {
+            transition: all 0.1s linear; 
+            height: 13vh; width: 36vh; 
+            background-image: URL('https://mathematical.neocities.org/pics/narwhal.png'); 
+            right: 4vh;
+        }
+    
 </style>
 
 </body>
   
+</html>

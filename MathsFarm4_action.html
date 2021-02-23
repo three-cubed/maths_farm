@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Farm 4 - The questions!</title>
     <link rel="icon" type="image/png" href="pics/faviconMF.png"/> 
-  </head>
-  <body id=body>
+</head>
+
+<body id=body>    
     <div id=topBtnContainer>
     
       <div id=balance_display></div>
@@ -72,7 +74,7 @@
           </div>
     </div>
     
-    <script>
+<script>
     
     let theme = 0;
     // NB: JS takes null as a STRING from localStorage; also use ==. or != for localStorage.
@@ -351,41 +353,170 @@
         localStorage.earningsStored = earnings;
     }
         
-    </script>
+</script>
     
-    <style>
-      
-      .farmBody{background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat;}
-      .aussieBody{background: url(pics/eucalpytus_bckgrnd_freeuse.jpg)center/cover no-repeat;}  
-      .underwaterBody{background: url(pics/undersea+fish.jpg)center/cover no-repeat;}  
-          #topBtnContainer{display: flex; justify-content: space-around; padding-top: 2vh;}
-          #balance_display{color: gold; font-size: 4vw;}
-          .btnColumn{display: flex; flex-direction: column;}
-              .opBtn{height: 5vh; width: 14vw; border-radius: 30%; outline: none; font-size: 1.3vw;}
-                  .opBtn:active{border: solid #585858 6px;}                            
-                  .plusBtn{background: coral; ;}
-                  .minusBtn{background: papayawhip; ;}
-                  .multBtn{background:  #99FF99; ;}
-                  .divBtn{background:  #99DfFF; ;}
-          .btnOn{border:  solid 6px orangered;}
-          #goToFarmBtn{height: 8vh; width: 15vw;  border-radius: 8px; background: green; font-size: 1.45vw;} 
-              #goToFarmBtn:hover{border: solid #585858 4px;}
-          #beginBtn{height: 8vh; width: 15vw; border-radius: 8px; background: white; font-size: 1.45vw;} 
-          .otherbtn{font-family: 'Luckiest Guy', cursive; font-weight: bold;}
-          #qstnContainer{min-height: 50vh;}
-          .qstnSubcontainer{display: flex; padding: 4vh 0 0 3vw;}
-              #question{font-size: 7vh; min-height: 10vh; min-width: 20vw;}
-              #qstnValDisplay{font-size: 5vh; min-height: 10vh; color: green; background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 16vw 0vw 0vw; position: relative; top: 2.5vh;}
-              #timerContainer{background: rgba(0, 0, 0, 0); font-weight: bold; padding: 0vw 10vw 0vw 10vw; position: relative; top: 2.5vh;}
-                  #timer{font-size: 5vh; border: solid 2px blue; color: blue; border-radius: 40%; min-width: 5vw; text-align: center; position: fixed;}
-                  .notRunning{visibility: hidden;}
-          #answerDiv{padding: 0 0 0 3vw;}
-              #userAnswer{font-size: 10vh; width: 18vw; min-width: 25vh; background: white; opacity: 0.5; color: darkblue; position: relative; ;}
-          #bothPointsDisplays{width: 60vw; display: flex; justify-content: left; padding-left: 2vw;}
-              #pointsThisPlayDisplay{font-size: 6vh; text-align: center; min-width: 30vw; text-shadow: -2px -2px 2px black; color: darkorange; font-weight: bold;}
-              #separator{min-width: 3vw;}
-              #fadingDisplay{min-height: 38vh; min-width: 25vw; font-size: 12vh; color: red; font-weight: bold; position: relative; bottom: 22vh; right: 10vh; background: rgba(0, 0, 0, 0);}
-      
-      </style>    
-  </body>
+<style>
+
+    /* Bodies */
+
+    .farmBody {
+        background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat;
+    }
+    .aussieBody {
+        background: url(pics/eucalpytus_bckgrnd_freeuse.jpg)center/cover no-repeat;
+    }  
+    .underwaterBody {
+        background: url(pics/undersea+fish.jpg)center/cover no-repeat;
+    }  
+
+    /* Buttons (themselves) */
+
+    #beginBtn {
+        height: 8vh; 
+        width: 15vw; 
+        border-radius: 8px; 
+        background: white; 
+        font-size: 1.45vw;
+    } 
+    .btnOn {
+        border:  solid 6px orangered;
+    }
+    .divBtn {
+        background:  #99DfFF;
+    }
+    #goToFarmBtn {
+        height: 8vh; 
+        width: 15vw;  
+        border-radius: 8px; 
+        background: green; 
+        font-size: 1.45vw;
+    } 
+    #goToFarmBtn:hover {
+        border: solid #585858 4px;
+    }
+    .minusBtn {
+        background: papayawhip;
+    }
+    .multBtn {
+        background:  #99FF99;
+    }
+    .opBtn {
+        height: 5vh; 
+        width: 14vw; 
+        border-radius: 30%; 
+        outline: none; 
+        font-size: 1.3vw;
+    }
+    .opBtn:active {
+        border: solid #585858 6px;
+    }    
+    .otherbtn {
+        font-family: 'Lucida Handwriting', cursive; 
+        font-weight: bold;
+    }                        
+    .plusBtn {
+        background: coral;
+    }    
+
+    /* Other CSS */
+
+    #answerDiv {
+        padding: 0 0 0 3vw;
+    } 
+    #balance_display {
+        color: gold; 
+        font-size: 4vw;
+    }
+    #bothPointsDisplays {
+        width: 60vw; 
+        display: flex; 
+        justify-content: left; 
+        padding-left: 2vw;
+    }
+    .btnColumn {
+        display: flex; 
+        flex-direction: column;
+    }
+    #fadingDisplay {
+        min-height: 38vh; 
+        min-width: 25vw; 
+        font-size: 12vh; 
+        color: red; 
+        font-weight: bold; 
+        position: relative; 
+        bottom: 22vh; 
+        right: 10vh; 
+        background: rgba(0, 0, 0, 0);
+    }
+    .notRunning {
+        visibility: hidden;
+    }   
+    #pointsThisPlayDisplay {
+        font-size: 6vh; 
+        text-align: center; 
+        min-width: 30vw; 
+        text-shadow: -2px -2px 2px black; 
+        color: darkorange; 
+        font-weight: bold;
+    }    
+    #qstnContainer {
+        min-height: 50vh;
+    }
+    .qstnSubcontainer {
+        display: flex; 
+        padding: 4vh 0 0 3vw;
+    }
+    #question {
+        font-size: 7vh; 
+        min-height: 10vh; 
+        min-width: 20vw;
+    }
+    #qstnValDisplay {
+        font-size: 5vh; 
+        min-height: 10vh; 
+        color: green; 
+        background: rgba(0, 0, 0, 0); 
+        font-weight: bold; 
+        padding: 0vw 16vw 0vw 0vw; 
+        position: relative; 
+        top: 2.5vh;
+    }      
+    #separator {
+        min-width: 3vw;
+    }    
+    #timerContainer {
+        background: rgba(0, 0, 0, 0); 
+        font-weight: bold; 
+        padding: 0vw 10vw 0vw 10vw; 
+        position: relative; 
+        top: 2.5vh;
+    }
+    #timer {
+        font-size: 5vh; 
+        border: solid 2px blue; 
+        color: blue; 
+        border-radius: 40%; 
+        min-width: 5vw; 
+        text-align: center; 
+        position: fixed;
+    }    
+    #topBtnContainer {
+        display: flex; 
+        justify-content: space-around; 
+        padding-top: 2vh;
+    }
+    #userAnswer {
+        font-size: 10vh; 
+        width: 18vw; 
+        min-width: 25vh; 
+        background: white; 
+        opacity: 0.5; 
+        color: darkblue; 
+        position: relative;
+    }    
+     
+</style>
+
+</body>
+
 </html>

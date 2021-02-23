@@ -404,6 +404,8 @@ and can also make transfer of code from the non-mobile version of the game easie
 </script>
 
 <style>
+
+    /* Animation */
     
     .animateRight{
         animation-name: animationRight;
@@ -514,31 +516,125 @@ and can also make transfer of code from the non-mobile version of the game easie
         transform: scaleX(-1);
     }
 
-    #body{margin: 0.5vh; height: calc(99% - 9vh); width: 99%; background: url(/pics/field_of_grass_4.jpg); background-repeat: no-repeat; background-size: 175% 105%;} 
-    #upperScreen{height: 16%; width: 95vw; padding-top: 3vh; display: flex; justify-content: space-around;} 
-        .sellBackUnderDrag{background-color: orange; opacity:0.25;}    
-        .animalBtn{height: 12vh; width: 13.6vw; border-radius: 20%; background: lightblue; outline: none;}
-            .animalBtn:hover{background: blue;}  
-            .animalBtn:active{border: solid 3px black;}
-        #changePageBtn{height: 12vh; min-width: 6vh; border-radius: 25%; background: orange; outline: none;}
-            #changePageBtn:hover{background: orangered;}  
-            #changepagebtn:active{border: solid 3px black;}
-        #balanceDisplay{color: gold; font-size: calc(3.5vw + 2.2vh); font-weight: bold; text-shadow: 	-1px -1px 0 black,	1px -1px 0 black,	-1px 1px 0 black,	1px 1px 0 black; position: relative; top: 2vh}
-    #mainScreen{height: calc(80% - 3vh); width: calc(99% - 15px); padding-left: 15px; padding-top: 5vh;}
-        .farmRow{height: 19.5vh; width: calc(99% - 20px); display: flex; justify-content: space-around; margin-left: -5px}
-            .farmBox{height: 12vh; width: 12vw; font-size: 5vw; 
-                  display: flex; 
-                  justify-content: center; 
-                  align-items: center;}
-            .underDrag{background-color: #03ac13; opacity:0.25; border-radius: 50%; position: relative; bottom: 1.33vh}
+    /* Body  */
 
-            .animal {position: relative; transition: all 1.5s linear; background-size: contain; background-repeat: no-repeat; cursor: not-allowed} 
-            .draggable {cursor: grab;}
+    #body {margin: 0.5vh; height: calc(99% - 9vh); width: 99%; background: url(/pics/field_of_grass_4.jpg); background-repeat: no-repeat; background-size: 175% 105%;} 
+    
+    /* Upper Screen */
 
-            .panda{z-index: 4; height: 17vh; width: 16vh; background-image: URL('https://mathematical.neocities.org/pics/panda.png');}
-            .cow{z-index: 3; height: 12vh; width: 10vh; background-image: URL('https://mathematical.neocities.org/pics/cow_free_use.png');}  
-            .pig{z-index: 2; height: 10vh; width: 7.5vh; background-image: URL('https://mathematical.neocities.org/pics/pig.png');}
-            .chicken{z-index: 1; height: 8vh; width: 9vh; background-image: URL('https://mathematical.neocities.org/pics/hen&chicks.png');}
+    .animalBtn {
+        height: 12vh; 
+        width: 13.6vw; 
+        border-radius: 20%; 
+        background: lightblue; 
+        outline: none;
+    }
+    .animalBtn:hover {
+        background: blue;
+    }  
+    .animalBtn:active {
+        border: solid 3px black;
+    }
+    #balanceDisplay {
+        color: gold; 
+        font-size: calc(3.5vw + 2.2vh); 
+        font-weight: bold; 
+        text-shadow: 	-1px -1px 0 black,	1px -1px 0 black,	-1px 1px 0 black,	1px 1px 0 black; 
+        position: relative; 
+        top: 2vh
+    }
+    #changePageBtn {
+        height: 12vh; 
+        min-width: 6vh; 
+        border-radius: 25%; 
+        background: orange; 
+        outline: none;
+    }
+    #changePageBtn:hover {
+        background: orangered;
+    }  
+    #changepagebtn:active {
+        border: solid 3px black;
+    }
+    .sellBackUnderDrag {
+        background-color: orange; 
+        opacity:0.25;
+    }  
+    #upperScreen {
+        height: 16%; 
+        width: 95vw; 
+        padding-top: 3vh; 
+        display: flex; 
+        justify-content: space-around;
+    } 
+
+    /* Main Screen (for animals themselves see further below) */
+
+    .draggable {
+        cursor: grab;
+    }
+    .farmRow {
+        height: 19.5vh; 
+        width: calc(99% - 20px); 
+        display: flex; 
+        justify-content: space-around; 
+        margin-left: -5px;
+    }
+    .farmBox {
+        height: 12vh; 
+        width: 12vw; 
+        font-size: 5vw; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    }
+    #mainScreen {
+        height: calc(80% - 3vh); 
+        width: calc(99% - 15px); 
+        padding-left: 15px; 
+        padding-top: 5vh;
+    }
+    .underDrag {
+        background-color: #03ac13; 
+        opacity:0.25; 
+        border-radius: 50%; 
+        position: relative; 
+        bottom: 1.33vh;
+    }
+
+    /* Animals  */
+    
+    .animal {
+        position: relative; 
+        transition: all 1.5s linear; 
+        background-size: contain; 
+        background-repeat: no-repeat; 
+        cursor: not-allowed;
+    } 
+    .panda {
+        z-index: 4; 
+        height: 17vh; 
+        width: 16vh; 
+        background-image: URL('https://mathematical.neocities.org/pics/panda.png');
+    }
+    .cow {
+        z-index: 3; 
+        height: 12vh; 
+        width: 10vh; 
+        background-image: URL('https://mathematical.neocities.org/pics/cow_free_use.png');
+    }  
+    .pig{
+        z-index: 2; 
+        height: 10vh; 
+        width: 7.5vh; 
+        background-image: URL('https://mathematical.neocities.org/pics/pig.png');
+    }
+    .chicken {
+        z-index: 1;
+        height: 8vh; 
+        width: 9vh; 
+        background-image: URL('https://mathematical.neocities.org/pics/hen&chicks.png');
+    }
           
 </style>
     
