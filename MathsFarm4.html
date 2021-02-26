@@ -18,11 +18,12 @@
 </head>
 
 <body id=body>
+
     <br><br><br>
     <div id=curvedText>
     <span style='font-size: 3vh'>Welcome to</span>
     <br>
-    <span style='font-size: 8vh'>Maths Farm <span style='color: #1050FF'>4</span></span>
+    <span style='font-size: 8vh'>Maths Farm <span class='blueText'>4</span></span>
     <br><br>
     <span style='font-size: 3vh'>...where arithmetic earns money...<br>and cows and pandas meet!</span>
     <span><br><br><br><br><br></span>
@@ -54,20 +55,23 @@
     
 <style>
 
-    #body{
+    #body {
         background: url(/pics/ruralback_FrUse.jpg)center/cover no-repeat; 
         height: 100vh;
     }    
-    #curvedText{
+    #curvedText {
         font-family: 'Lucida Handwriting', cursive; 
         text-align: center; 
         font-weight: bold;
     }
-    #btnDiv1{
+    .blueText {
+        color: #1050FF;
+    }
+    #btnDiv1 {
         display: flex; 
         justify-content: space-around;
     }
-    .bigBtn{
+    .bigBtn {
         height: 25vh;  
         width: 20vw; 
         min-width: 22vh; 
@@ -76,39 +80,39 @@
         font-size: calc(1.5vw + 3vh); 
         font-family: 'Lucida Handwriting', cursive;
     }
-    #outerLeftBtn{
-        background:forestgreen; 
+    #outerLeftBtn {
+        background: forestgreen; 
         position: relative; 
         top: -10vh; 
         left: 6.6vh;
     }
-        #outerLeftBtn:active{
-            background:darkgreen;
+        #outerLeftBtn:active {
+            background: darkgreen;
         }
-    #innerLeftBtn{
-        background:#10521e; 
+    #innerLeftBtn {
+        background: #10521e; 
         position: relative; 
         top: 8.3vh;
     }
-        #innerLeftBtn:active{
-            background:#082b10;
+        #innerLeftBtn:active {
+            background: #082b10;
         }
-    #innerRightBtn{
-        background:mediumseagreen; 
+    #innerRightBtn {
+        background: #199a90; 
         font-size: calc(1.6vw + 2.2vh); 
         position: relative; 
         top: 8.3vh;
     }
-        #innerRightBtn:active{
-            background:darkgreen;
+        #innerRightBtn:active {
+            background: darkgreen;
         }
-    #outerRightBtn{
-        background:#83ae2a; 
+    #outerRightBtn {
+        background: #83ae2a; 
         position: relative; 
         top: -10vh; 
         left: -6.6vh;
     }
-        #outerRightBtn:active{
+        #outerRightBtn:active {
             background:green;
         }     
                 

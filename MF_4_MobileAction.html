@@ -123,12 +123,12 @@
     
     function newQstn() {
         if (level_btn_easy.classList.contains('btnOn')) {
-            const rand = generateNumber(1, 7);
-            if (rand === 1) askPlus_easiest();
+            const rand = generateNumber(1, 9);
+            if (rand === 1 || rand === 8) askPlus_easiest();
             if (rand === 2) askPlus_easy();
             if (rand === 3) askMinus_easiest();
             if (rand === 4) askMinus_easy();
-            if (rand === 5) askMult_easiest();
+            if (rand === 5 || rand === 9) askMult_easiest();
             if (rand === 6) askMult_easy();
             if (rand === 7) askDiv_easiest();
         }
