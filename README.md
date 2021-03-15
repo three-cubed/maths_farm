@@ -4,7 +4,7 @@
 
 Maths Farm is a front-end-only project. It must be combined with a web-hosting service, or some other backend structure.
 
-In terms of the structuring of the file system, I have chosen to place the javascript and CSS together with the HTML on the same pages. With the web host I have been using for this project, this has worked more quickly and reliably than cross-linking pages. This does result in longer files and a little repetition across files, notably in the CSS.
+In terms of the structuring of the file system, I have chosen to place the javascript and CSS together with the HTML in the same files. With the web host I have been using for this project, this has worked more quickly and reliably than cross-linking files. This does result in longer files and a little repetition across them, notably in the CSS.
 
 I have not yet added to the repository any of the images used in the game. I do intend to do this. 
 
@@ -16,9 +16,9 @@ In general terms, the gameplay should be self-explanatory and instructions are n
 
 2. Choose the questions. The player (or teacher) chooses which operations the questions will involve, and at what level of difficulty. More difficult questions earn more money. The game offers a wide range of difficulty between the easiest and most difficult levels. Question settings may be changed mid-game, and will take effect on the following question. Maths Farm Mobile, which despite its name may be played on any computer, offers a much simpler, but therefore less customisable, choice of questions: The Maths Farm Mobile question choice is simply to select one of the three difficulty levels.
 
-3. Play on the arithmetic screen. Commencing a play earns an immediate payment just for playing. Subsequent money is earnt by giving correct answers. A question must be answered to move to the next question. At the end of each play, the money earnt is transferred to the players overall account. They can then play again, or choose to go to the animals.
+3. Play on the arithmetic screen. Commencing a play earns an immediate payment just for playing. Subsequent money is earnt by giving correct answers. A question must be answered to move to the next question. At the end of each play, the money earnt is transferred to the player's overall account. They can then play again, or choose to go to the animals.
 
-4. Go to the animals. The player can buy animals, if they have earnt enough money for their choice of animal. The player can move animals, for £1 each time (currency may vary according to theme), if they have the money and their device supports drag and drop. In addition, the animals will move themselves from time to time. With the undersea theme, the animals move much more frequently. The player can also sell animals by dragging them to the top of the screen and dropping them there. They will get back three quarters of the amount they originally paid for the animal.
+4. Go to the animals. The player can buy animals, if they have earnt enough money for their choice of animal. The player can also move animals, for £1 each time (currency may vary according to theme), if they have the money and their device supports drag and drop. In addition, the animals will move themselves from time to time. With the undersea theme, the animals move much more frequently. The player can also sell animals by dragging them to the top of the screen and dropping them there. They will get back three quarters of the amount they originally paid for the animal.
 
 The player then proceeds to toggle between steps 3 and 4 for the remainder of the game.
 
