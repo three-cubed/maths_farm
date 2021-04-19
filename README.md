@@ -2,11 +2,13 @@
 
 #### Code
 
-Maths Farm is a front-end-only project. It must be combined with a web-hosting service, or some other backend structure.
+Maths Farm is a front-end-only project. It must be combined with a web-hosting service, or some other server or backend structure. 
+
+If you have it installed, the game can be played from the directory using VS Code Live Server. In VS Code, go to the file `MathsFarm4.html`, right click, and choose `Open with Live Server`.
+
+Note that I have not yet added to the repository any of the images used in the game. I do intend to do this Nonetheless, the absolute URLs for images mean that they can be viewed while you have internet access.
 
 In terms of the structuring of the file system, I have chosen to place the javascript and CSS together with the HTML in the same files. With the web host I have been using for this project, this has worked more quickly and reliably than cross-linking files. This does result in longer files and a little repetition across them, notably in the CSS.
-
-I have not yet added to the repository any of the images used in the game. I do intend to do this. 
 
 #### Gameplay
 
@@ -24,7 +26,9 @@ The player then proceeds to toggle between steps 3 and 4 for the remainder of th
 
 #### Brief version notes
 
-This is Maths Farm 4, deployed in February 2021. Version 1 was deployed in August 2020 and was similar to the current Maths Farm Classic theme. Version 2 introduced the four themes. Version 3 was a reorganisation of the programming code and made some minor alterations to the player experience. Version 4 has introduced drag and drop (for devices that support drag and drop) and simple animation.
+This is Maths Farm 4, deployed in February 2021 (with updates in April). 
+
+Version 1 was similar to the current Maths Farm Classic theme. Version 2 introduced the four themes. Version 3 was a reorganisation/refactoring of the programming code and made some minor alterations to the player experience. Version 4 has introduced drag and drop (for devices that support drag and drop) and simple animation.
 
 #### Usage and licence
 
