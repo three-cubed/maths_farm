@@ -113,7 +113,7 @@
     const fadingDisplay = document.getElementById('fadingDisplay');
 
     const timer = document.getElementById('timer');
-    let timerrunning = false;
+    let timerRunning = false;
     const answerDiv = document.getElementById('answerDiv');
     const userAnswer = document.getElementById('userAnswer');
     answerDiv.addEventListener('keyup', check_answer);
@@ -157,7 +157,7 @@
         }
         if (questionpicked === false) {
             alert('You have not picked any questions!');
-        } else if (questionpicked === true && timerrunning === false) {
+        } else if (questionpicked === true && timerRunning === false) {
             userAnswer.focus();
             startTimer();
             timer.classList.remove('notRunning');
@@ -295,14 +295,14 @@
     }
 
     function check_answer() {
-        if (userAnswer.value == correctAnswer && timerrunning === true) { // Do not use === here, as userAnswer.value is in fact a string.
+        if (userAnswer.value == correctAnswer && timerRunning === true) { // Do not use === here, as userAnswer.value is in fact a string.
             points = qstnVal + points;
             fadingDisplay.textContent = '✔ ' + currency + qstnVal + moneySuffix;
             pointsThisPlayDisplay.textContent = 'This play: ' + currency + points + moneySuffix;
             userAnswer.value = '';
             createNewQstn();
             showAndFade();
-        } else if (timerrunning === false) {
+        } else if (timerRunning === false) {
             userAnswer.value = '';
         }
     }
@@ -323,27 +323,41 @@
         }
     }
 
+    // New code for timer starts here
+
+    let elapsedSeconds = 0;
+    let startPoint;
+    function defineStartPoint() {
+            startPoint = Date.now() - (elapsedSeconds*1000)
+    }
+
+    playTimeInSeconds = 10; // desired time for one play in seconds (80 as standard)
+
     function startTimer() {
-        if (timerrunning === false) {
-            timerrunning = true;
-            timer.textContent = '80'; // desired time
-            timer.textContent = parseInt(timer.textContent) + 1; // accommodating first second
+        if (timerRunning === false) {
+            timerRunning = true;
+            defineStartPoint();
+            timer.textContent = playTimeInSeconds; 
             runTimer();
         }
     }
 
     function runTimer() {
-        if (parseInt(timer.textContent) > 1) {
+        elapsedSeconds = Math.floor((Date.now() - startPoint)/1000);
+        timeRemaining = playTimeInSeconds - elapsedSeconds;
+        if (timeRemaining > 0) {
             userAnswer.focus();
-            timer.textContent -= 1;
+            timer.textContent = timeRemaining;
             setTimeout('runTimer()', 1000);
         } else {
+            timer.textContent = 0;
             stopTimer();
         }
     }
 
     function stopTimer() {
-        timerrunning = false;
+        elapsedSeconds = 0;
+        timerRunning = false;
         question.textContent = '';
         qstnValDisplay.textContent = '';
         timer.textContent = '';
@@ -352,6 +366,8 @@
         balance_display.textContent = currency + earnings + moneySuffix;
         localStorage.earningsStored = earnings;
     }
+
+    // New code for timer ends here
         
 </script>
     

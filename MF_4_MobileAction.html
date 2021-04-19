@@ -305,26 +305,40 @@
         }
     }
     
+    // New code for timer starts here
+
+    let elapsedSeconds = 0;
+    let startPoint;
+    function defineStartPoint() {
+            startPoint = Date.now() - (elapsedSeconds*1000)
+    }
+
+    playTimeInSeconds = 10; // desired time for one play in seconds (80 as standard)
+
     function startTimer() {
         if (timerRunning === false) {
             timerRunning = true;
-            timer.textContent = '60'; // desired time, should be 60
-            timer.textContent = parseInt(timer.textContent) + 1; // accommodating first second
+            defineStartPoint();
+            timer.textContent = playTimeInSeconds; 
             runTimer();
         }
     }
-    
+
     function runTimer() {
-        if (parseInt(timer.textContent) > 1) {
+        elapsedSeconds = Math.floor((Date.now() - startPoint)/1000);
+        timeRemaining = playTimeInSeconds - elapsedSeconds;
+        if (timeRemaining > 0) {
             userAnswer.focus();
-            timer.textContent -= 1;
+            timer.textContent = timeRemaining;
             setTimeout('runTimer()', 1000);
         } else {
+            timer.textContent = 0;
             stopTimer();
         }
     }
-    
+
     function stopTimer() {
+        elapsedSeconds = 0;
         timerRunning = false;
         question.textContent = '';
         timer.textContent = '';
