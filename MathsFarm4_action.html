@@ -323,15 +323,13 @@
         }
     }
 
-    // New code for timer starts here
-
     let elapsedSeconds = 0;
     let startPoint;
     function defineStartPoint() {
             startPoint = Date.now() - (elapsedSeconds*1000)
     }
 
-    playTimeInSeconds = 10; // desired time for one play in seconds (80 as standard)
+    playTimeInSeconds = 80; // desired time for one play in seconds (80 as standard)
 
     function startTimer() {
         if (timerRunning === false) {
@@ -366,8 +364,6 @@
         balance_display.textContent = currency + earnings + moneySuffix;
         localStorage.earningsStored = earnings;
     }
-
-    // New code for timer ends here
         
 </script>
     
