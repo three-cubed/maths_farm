@@ -6,7 +6,7 @@ Maths Farm is a front-end-only project. It must be combined with a web-hosting s
 
 If you have it installed, the game can be played from the directory using VS Code Live Server. In VS Code, go to the file `MathsFarm4.html`, right click, and choose `Open with Live Server`.
 
-Note that I have not yet added to the repository any of the images used in the game. I do intend to do this Nonetheless, the absolute URLs for images mean that they can be viewed while you have internet access.
+Note that I have not yet added to the repository any of the images used in the game. I do intend to do this. Nonetheless, the absolute URLs for images mean that they can be viewed while you have internet access.
 
 In terms of the structuring of the file system, I have chosen to place the javascript and CSS together with the HTML in the same files. With the web host I have been using for this project, this has worked more quickly and reliably than cross-linking files. This does result in longer files and a little repetition across them, notably in the CSS.
 
