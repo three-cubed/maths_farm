@@ -89,11 +89,21 @@
     const btnOn = document.getElementsByClassName('btnOn');
     
     function choose(pressedBtn) {
-        for (let i = 0; i < levelBtns.length; i++) {
-            if (levelBtns[i] === pressedBtn) {
-                pressedBtn.classList.toggle('btnOn');
-            } else {
-                levelBtns[i].classList.remove('btnOn');
+        if (
+            document.getElementsByClassName('btnOn').length == 1
+            && 
+            pressedBtn.classList.contains('btnOn')
+            &&
+            timerRunning == true
+        ) {
+            alert('Press a different level button to change level.');
+        } else {
+            for (let i = 0; i < levelBtns.length; i++) {
+                if (levelBtns[i] === pressedBtn) {
+                    pressedBtn.classList.toggle('btnOn');
+                } else {
+                    levelBtns[i].classList.remove('btnOn');
+                }
             }
         }
     }
@@ -372,7 +382,7 @@
         border: solid #585858 2px;
     }
     .btnOn {
-        border: solid 3px orangered;
+        border: solid 4px yellow;
     }
     .flexiDiv {
         display: flex; 
@@ -466,6 +476,7 @@
         font-size: 7.5vh; 
         min-height: 10vh; 
         min-width: 28vw;
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
     }
     .qstnSubcontainer {
         display: flex; 
@@ -489,7 +500,8 @@
         min-width: 5vw; 
         text-align: center; 
         position: fixed;
-    }
+        text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow, 1px 1px 0 yellow;
+        }
     .notRunning {
         visibility: hidden;
     } 

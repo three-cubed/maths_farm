@@ -557,12 +557,10 @@
         background: orangered;
     }  
     .draggable:hover {
-        cursor: move; /* fallback: no `url()` support or images disabled */
-        cursor: url(images/grab.cur); /* fallback: Chrome 1-21, Firefox 1.5-26, Safari 4+, IE, Edge 12-14, Android 2.1-4.4.4 */
-        cursor: grab; /* W3C standards syntax, all modern browser */
+        cursor: move; /* fallback, for older browsers */
+        cursor: grab; /* standard, for modern browsers */
     }
     .draggable:active {
-        cursor: url(images/grabbing.cur);
         cursor: grabbing;
     }
     .farmBox{
@@ -693,7 +691,7 @@
             transition: all 0.1s linear; 
             height: 13vh; width: 36vh; 
             background-image: URL('https://mathematical.neocities.org/pics/narwhal.png'); 
-            right: 4vh;
+            /* right: 4vh; */
         }
     
 </style>

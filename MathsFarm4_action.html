@@ -46,8 +46,8 @@
       </div>
       
       <div class=btnColumn>
-        <button type=button id='beginBtn' class='otherbtn' onclick='beginPlay()'>Begin play.</button>
-        <button type=button id='goToFarmBtn' class='otherbtn'>Go to the animals.</button>
+        <button type=button id='beginBtn' class='otherBtn' onclick='beginPlay()'>Begin play.</button>
+        <button type=button id='goToFarmBtn' class='otherBtn'>Go to the animals.</button>
       </div>
       
     </div>
@@ -143,7 +143,17 @@
     }
 
     function toggleBtn(pressedBtn) {
-        pressedBtn.classList.toggle('btnOn');
+        if (
+            document.getElementsByClassName('btnOn').length == 1
+            &&
+            pressedBtn.classList.contains('btnOn')
+            &&
+            timerRunning == true
+        ) {
+            alert('You need at least one button to remain selected during play.');
+        } else {
+            pressedBtn.classList.toggle('btnOn');
+        }
     }
 
     function beginPlay() {
@@ -372,7 +382,7 @@
     /* Bodies */
 
     .farmBody {
-        background: url(https://mathematical.neocities.org//pics/ruralback_FrUse.jpg)center/cover no-repeat;
+        background: url(https://mathematical.neocities.org/pics/ruralback_FrUse.jpg)center/cover no-repeat;
     }
     .aussieBody {
         background: url(https://mathematical.neocities.org/pics/eucalpytus_bckgrnd_freeuse.jpg)center/cover no-repeat;
@@ -388,7 +398,7 @@
         width: 15vw; 
         border-radius: 8px; 
         background: white; 
-        font-size: 1.45vw;
+        font-size: 1.33vw;
     } 
     .btnOn {
         border:  solid 6px orangered;
@@ -401,7 +411,7 @@
         width: 15vw;  
         border-radius: 8px; 
         background: green; 
-        font-size: 1.45vw;
+        font-size: 1.33vw;
     } 
     #goToFarmBtn:hover {
         border: solid #585858 4px;
@@ -422,7 +432,7 @@
     .opBtn:active {
         border: solid #585858 6px;
     }    
-    .otherbtn {
+    .otherBtn {
         font-family: 'Lucida Handwriting', cursive; 
         font-weight: bold;
     }                        
@@ -467,7 +477,7 @@
         font-size: 6vh; 
         text-align: center; 
         min-width: 30vw; 
-        text-shadow: -2px -2px 2px black; 
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         color: darkorange; 
         font-weight: bold;
     }    
@@ -482,11 +492,13 @@
         font-size: 7vh; 
         min-height: 10vh; 
         min-width: 20vw;
+        text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
     }
     #qstnValDisplay {
         font-size: 5vh; 
         min-height: 10vh; 
         color: green; 
+        text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow, 1px 1px 0 yellow;
         background: rgba(0, 0, 0, 0); 
         font-weight: bold; 
         padding: 0vw 16vw 0vw 0vw; 
@@ -505,8 +517,9 @@
     }
     #timer {
         font-size: 5vh; 
-        border: solid 2px blue; 
+        border: solid 3px blue; 
         color: blue; 
+        text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow, 1px 1px 0 yellow;
         border-radius: 40%; 
         min-width: 5vw; 
         text-align: center; 
