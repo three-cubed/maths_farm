@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The web site of mathematical</title>
+    <!-- The style.css file allows you to change the look of your web pages.
+         If you include the next line in all your web pages, they will all share the same look.
+         This makes it easier to make new pages for your site. -->
+    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+  </head>
+  <body>
+
+      <div id=titleForInstructions>How to play Maths Farm <span class='blueText'>4</span></div>
+  
+      <div id='slideDisplayContainer'>
+           <img name='slide' id='slideDisplay' />
+      </div>
+      
+      <div id=buttonsDiv>
+          <button type='button' id='backBtn' onclick='runImageSlideshow(this.id, -1, 800)'>
+              ⇦&emsp;Last slide
+          </button>
+          
+          <div id=slideNumDisplay></div>
+          
+          <button type='button' id='nextBtn' onclick='runImageSlideshow(this.id, 1, 800)'>
+              Next slide&emsp;⇨
+          </button>
+      </div>
+
+  <script>
+  
+      const images = [];
+      const imagePath = 'https://mathematical.neocities.org/instruction_slides/';
+      // If you add any more instructions, ensure that you increase numberOfInstructions 
+      // and that you name them in accordance with the format in the function below.las
+      const numberOfInstructions = 13;
+      for (let i = 1; i <= numberOfInstructions; i++) {
+        images[i] = `${imagePath}instruction_${i}.png`;
+      }
+      
+      const backBtn = document.getElementById('backBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      let slideNum = 1;
+      const slideNumDisplay = document.getElementById('slideNumDisplay');
+      
+      // const time = 7500;	// Time for each image to show.
+      
+      // function runImageSlideshow() {
+      //     document.slide.src = images[i];
+      //     if (i < images.length -1) {
+      //         i++;
+      //     } else {
+      //         i = 1;
+      //     }
+      //     setTimeout('runImageSlideshow()', time);
+      // }
+      
+      function runImageSlideshow(btn, num, unfadeInterval) {
+          if (btn !== null && document.getElementById(btn).classList.contains('faded')) return;
+          backBtn.classList.add('faded');
+          nextBtn.classList.add('faded');
+          slideNum += num;
+          if (slideNum > images.length -1) {
+              slideNum -= num;
+          } else if (slideNum < 1) {
+              slideNum -= num;
+          }
+          console.log(slideNum)
+          document.slide.src = images[slideNum];
+          slideNumDisplay.innerText = slideNum;
+          if (slideNum < 2) {
+              backBtn.classList.add('atEnd');
+              setTimeout('unfade(false, true)', unfadeInterval);
+          } else if (slideNum > images.length -2) {
+              nextBtn.classList.add('atEnd');
+              setTimeout('unfade(true, false)', unfadeInterval);
+          } else {
+              setTimeout('unfade()', unfadeInterval);
+          }
+      }
+      
+      function unfade(backBtnUnfade = true, nextBtnUnfade = true) {
+          if (backBtnUnfade === true) {
+              backBtn.classList.remove('faded');
+              backBtn.classList.remove('atEnd');
+          }
+          if (nextBtnUnfade === true) {
+              nextBtn.classList.remove('faded');
+              nextBtn.classList.remove('atEnd');
+          }
+      }
+        
+      window.onload = () => {
+          runImageSlideshow(null, 0, 50);
+      };
+      
+  </script>
+  <style>
+  
+      button {
+          background-color: green;
+          color: white;
+          height: 50px;
+          width: 250px;
+          border-radius: 8%;
+          margin: 22px;
+          font-size: 2.5vh;
+          
+          transition-duration: 0.1s;
+          transition-timing-function: linear;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+      .faded:hover {
+        cursor: wait;
+      }
+      .atEnd:hover {
+        cursor: not-allowed;
+      }
+  
+      #buttonsDiv {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      #titleForInstructions {
+          font-family: 'Lucida Handwriting', cursive;
+          text-align: center; 
+          font-weight: bold;
+          font-size: 5vh;
+      }
+      #slideDisplay {
+          width: 1000px;
+          max-width: 98%;
+          height: 667px;
+          max-height: 100%;
+          border-radius: 5%;
+          border: solid green 0.5vh;
+      }
+      #slideDisplayContainer {
+          height: calc(33vh + 20vw);
+          margin: 14px 0px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      #slideNumDisplay {
+        font-size: 3vh;
+        height: 4.1vh;
+        width: 5.2vh;
+        border: solid black 2px;
+        border-radius: 50%;
+        text-align: center;
+      }
+
+      .blueText {
+          color: blue;
+      }
+      .faded {
+          opacity: 0.45;
+      }
+      
+  </style>
+        
+  </body>
+</html>

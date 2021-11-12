@@ -26,7 +26,7 @@ The player then proceeds to toggle between steps 3 and 4 for the remainder of th
 
 #### Brief version notes
 
-This is Maths Farm 4, deployed in February 2021 (with updates in April). 
+This is Maths Farm 4, deployed in February 2021 (with updates and edits from time to time thereafter).
 
 Version 1 was similar to the current Maths Farm Classic theme. Version 2 introduced the four themes. Version 3 was a reorganisation/refactoring of the programming code and made some minor alterations to the player experience. Version 4 has introduced drag and drop (for devices that support drag and drop) and simple animation.
 

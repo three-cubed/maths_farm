@@ -1,11 +1,11 @@
 <!DOCTYPE html>
+
 <html>
-  
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maths Farm 4 - Start Page!</title>
-    <link rel="icon" type="image/png" href="https://mathematical.neocities.org/pics/faviconMF.png"/> 
+    <link rel="icon" type="image/png" href="pics/faviconMF.png"/>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMS7WJJYK0"></script>
     <script>
@@ -15,10 +15,8 @@
     
       gtag('config', 'G-GMS7WJJYK0');
     </script>
-</head>
-
+  </head>
 <body id=body>
-
     <br><br><br>
     <div id=curvedText>
     <span style='font-size: 3vh'>Welcome to</span>
@@ -35,6 +33,9 @@
         <button type=button class=bigBtn id=innerLeftBtn onclick='goToMathsPage("/MF_4_Mobile1stPage.html", null)'>
             Maths Farm Mobile
         </button>
+        <button type=button class=bigBtn id=middleBtn onclick='goToMathsPage("/MathsFarm4_instructions.html", 2)'>
+            How to Play
+        </button>
         <button type=button class=bigBtn id=innerRightBtn onclick='goToMathsPage("/MathsFarm4_action.html", 2)'>
             Undersea Mathematics
         </button>
@@ -42,7 +43,9 @@
             Australian Arithmetic
         </button>
     </div>
-    
+    <div id=copyrightFragment>
+        ©️ Three Cubed, 2020 etc.
+    </div>
 <script>
     
     function goToMathsPage(page, themeNum){
@@ -55,13 +58,16 @@
     
 <style>
 
+    button:hover {
+        cursor: pointer;
+    }
     #body {
-        background: url(https://mathematical.neocities.org/pics/ruralback_FrUse.jpg)center/cover no-repeat; 
+        background: url(https://mathematical.neocities.org/pics/ruralback_FrUse.jpg)center/cover no-repeat;
         height: 100vh;
     }    
     #curvedText {
-        font-family: 'Lucida Handwriting', cursive; 
-        text-align: center; 
+        font-family: 'Lucida Handwriting', cursive;
+        text-align: center;
         font-weight: bold;
     }
     .blueText {
@@ -77,8 +83,16 @@
         min-width: 22vh; 
         border-radius: 50%; 
         outline: none; 
-        font-size: calc(1.5vw + 3vh); 
+        font-size: calc(1vw + 2.8vh);
         font-family: 'Lucida Handwriting', cursive;
+    }
+    #copyrightFragment {
+        font-size: 22px;
+        font-family: 'Lucida Handwriting', cursive; 
+        text-align: center; 
+        font-weight: 900;
+        position: relative;
+        top: 14vh;
     }
     #outerLeftBtn {
         background: forestgreen; 
@@ -90,21 +104,31 @@
             background: darkgreen;
         }
     #innerLeftBtn {
-        background: #10521e; 
+        background: #10521e;
         position: relative; 
         top: 8.3vh;
+        left: 3.6vh;
     }
         #innerLeftBtn:active {
             background: #082b10;
         }
     #innerRightBtn {
-        background: #199a90; 
-        font-size: calc(1.6vw + 2.2vh); 
+        background:  #199a90;
+        /*font-size: calc(1vw + 2.8vh); */
         position: relative; 
         top: 8.3vh;
+        right: 3.6vh;
     }
         #innerRightBtn:active {
             background: darkgreen;
+        }
+    #middleBtn {
+        background: #aadc00;
+        position: relative;
+        top: -10vh;
+    }
+        #middleBtn:active {
+            background: #739900;
         }
     #outerRightBtn {
         background: #83ae2a; 
@@ -112,9 +136,9 @@
         top: -10vh; 
         left: -6.6vh;
     }
-        #outerRightBtn:active {
-            background:green;
-        }     
+    #outerRightBtn:active {
+        background:green;
+    }
                 
 </style>
 
