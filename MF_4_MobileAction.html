@@ -70,7 +70,7 @@
     let correctAnswer;
     const question = document.getElementById('question');
     
-    let questionpicked = false;
+    let questionPicked = false;
     
     const pointsThisPlayDisplay = document.getElementById('pointsThisPlayDisplay');
     pointsThisPlayDisplay.textContent = 'This play: ' + currency + points;
@@ -109,17 +109,17 @@
     }
     
     function beginPlay() {
-        questionpicked = false;
+        questionPicked = false;
         points = 0;
         for (let i = 0; i < levelBtns.length; i++) {
             if (levelBtns[i].classList.contains('btnOn')) {
-                questionpicked = true;
+                questionPicked = true;
                 break;
             }
         }
-        if (questionpicked === false) {
+        if (questionPicked === false) {
             alert('You have not picked your level!');
-        } else if (questionpicked === true && timerRunning === false) {
+        } else if (questionPicked === true && timerRunning === false) {
             userAnswer.focus();
             startTimer();
             timer.classList.remove('notRunning');

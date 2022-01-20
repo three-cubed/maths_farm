@@ -106,7 +106,7 @@
     let no2;
     const question = document.getElementById('question');
 
-    let questionpicked = false;
+    let questionPicked = false;
 
     const qstnValDisplay = document.getElementById('qstnValDisplay');
     const pointsThisPlayDisplay = document.getElementById('pointsThisPlayDisplay');
@@ -157,17 +157,17 @@
     }
 
     function beginPlay() {
-        questionpicked = false;
+        questionPicked = false;
         points = 0;
         for (let i = 0; i < opBtns.length; i++) {
             if (opBtns[i].classList.contains('btnOn')) {
-                questionpicked = true;
+                questionPicked = true;
                 break;
             }
         }
-        if (questionpicked === false) {
+        if (questionPicked === false) {
             alert('You have not picked any questions!');
-        } else if (questionpicked === true && timerRunning === false) {
+        } else if (questionPicked === true && timerRunning === false) {
             userAnswer.focus();
             startTimer();
             timer.classList.remove('notRunning');
@@ -386,10 +386,10 @@
     }
     .aussieBody {
         background: url(https://mathematical.neocities.org/pics/eucalpytus_bckgrnd_freeuse.jpg)center/cover no-repeat;
-    }  
+    }
     .underwaterBody {
         background: url(https://mathematical.neocities.org/pics/undersea+fish.jpg)center/cover no-repeat;
-    }  
+    }
 
     /* Buttons (themselves) */
 
@@ -399,7 +399,7 @@
         border-radius: 8px; 
         background: white; 
         font-size: 1.33vw;
-    } 
+    }
     .btnOn {
         border:  solid 6px orangered;
     }
@@ -412,7 +412,7 @@
         border-radius: 8px; 
         background: green; 
         font-size: 1.33vw;
-    } 
+    }
     #goToFarmBtn:hover {
         border: solid #585858 4px;
     }
@@ -431,20 +431,20 @@
     }
     .opBtn:active {
         border: solid #585858 6px;
-    }    
+    }
     .otherBtn {
         font-family: 'Lucida Handwriting', cursive; 
         font-weight: bold;
-    }                        
+    }
     .plusBtn {
         background: coral;
-    }    
+    }
 
     /* Other CSS */
 
     #answerDiv {
         padding: 0 0 0 3vw;
-    } 
+    }
     #balance_display {
         color: gold; 
         font-size: 4vw;
@@ -472,7 +472,7 @@
     }
     .notRunning {
         visibility: hidden;
-    }   
+    }
     #pointsThisPlayDisplay {
         font-size: 6vh; 
         text-align: center; 
@@ -480,7 +480,7 @@
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         color: darkorange; 
         font-weight: bold;
-    }    
+    }
     #qstnContainer {
         min-height: 50vh;
     }
@@ -504,10 +504,10 @@
         padding: 0vw 16vw 0vw 0vw; 
         position: relative; 
         top: 2.5vh;
-    }      
+    }
     #separator {
         min-width: 3vw;
-    }    
+    }
     #timerContainer {
         background: rgba(0, 0, 0, 0); 
         font-weight: bold; 
@@ -524,7 +524,7 @@
         min-width: 5vw; 
         text-align: center; 
         position: fixed;
-    }    
+    }
     #topBtnContainer {
         display: flex; 
         justify-content: space-around; 
@@ -538,7 +538,7 @@
         opacity: 0.5; 
         color: darkblue; 
         position: relative;
-    }    
+    }
      
 </style>
 

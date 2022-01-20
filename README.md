@@ -12,7 +12,7 @@ In terms of the structuring of the file system, I have chosen to place the javas
 
 #### Gameplay
 
-In general terms, the gameplay should be self-explanatory and instructions are not necessary. However, reading the instructions below should give a more detailed understanding.
+Hopefully, the gameplay should be self-explanatory and instructions are not necessary. However, the link to instructions is available on the start page. In addition, if so desired, reading the instructions below should give a more detailed understanding.
 
 1. Choose the theme. There are four themes. Three themes differ only in appearance, while the fourth, Maths Farm Mobile, runs different files and differs somewhat in the actual mechanics of gameplay.
 
